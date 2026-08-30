@@ -1,5 +1,5 @@
 <resources>
-    <string name="bottom_nav_label_home">Home</string>
+    <string name="bottom_nav_label_home">Quests</string>
     <string name="bottom_nav_label_profile">Profile</string>
     <string name="bottom_nav_label_favorites">Favorites</string>
     <string name="title_error_dialog">Error</string>
@@ -28,7 +28,7 @@
     <string name="text_here">here</string>
     <string name="title_successful_purchase">Congratulations!</string>
     <string name="subtitle_successful_purchase">You now have premium access. Enjoy all the exclusive features!</string>
-    <string name="btn_action_successful_purchase">Explore Premium Benefits</string>
+    <string name="btn_action_successful_purchase">Get Started!</string>
     <string name="benefits">Benefits</string>
     <string name="banner_title_upgrade_premium">Upgrade Premium</string>
     <string name="banner_subtitle_upgrade_premium">Enjoy all premium benefits.</string>

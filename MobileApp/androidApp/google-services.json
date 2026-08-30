@@ -1,26 +1,87 @@
 {
   "project_info": {
-    "project_number": "963217316701",
-    "project_id": "PROJECT_ID",
-    "storage_bucket": "STORAGE_BUCKET (PROJECT_ID.appspot.com)"
+    "project_number": "560525802103",
+    "project_id": "koko-demo-71050",
+    "storage_bucket": "koko-demo-71050.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "MOBILESDK_APP_ID",
+        "mobilesdk_app_id": "1:560525802103:android:2fc60f66f5a58aafb56472",
         "android_client_info": {
-          "package_name": "com.kotlinfoundation.koko"
+          "package_name": "com.indieplaybook.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "560525802103-voiu8k09cl2sskrfkv6vvvlj1dsr6jpu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIyrGxupGvfQdTUWtuANBVFlDNlBosffKORk4to"
+          "current_key": "AIzaSyBiTBndy7K6Akp-oaGUz6JceGLXIwx3i_o"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560525802103-voiu8k09cl2sskrfkv6vvvlj1dsr6jpu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "560525802103-8f5ngpkv251ebbmkkm2vp5pinppmtfej.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kotlinfoundation.koko"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560525802103:android:effc9a94edada79ab56472",
+        "android_client_info": {
+          "package_name": "com.dyor.habithero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560525802103-qh9pc4rkkolonq4me0uhs0j4l2au424g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dyor.habithero",
+            "certificate_hash": "393608e6ed550725a324a1063ede90e99f1d58c0"
+          }
+        },
+        {
+          "client_id": "560525802103-voiu8k09cl2sskrfkv6vvvlj1dsr6jpu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiTBndy7K6Akp-oaGUz6JceGLXIwx3i_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560525802103-voiu8k09cl2sskrfkv6vvvlj1dsr6jpu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "560525802103-8f5ngpkv251ebbmkkm2vp5pinppmtfej.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kotlinfoundation.koko"
+              }
+            }
+          ]
         }
       }
     }

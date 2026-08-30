@@ -1,12 +1,19 @@
 <resources>
-    <string name="bottom_nav_label_home">Home</string>
-    <string name="bottom_nav_label_profile">Profile</string>
-    <string name="bottom_nav_label_gallery">Gallery</string>
+    <string name="bottom_nav_label_home">Quests</string>
+    <string name="bottom_nav_label_profile">Settings</string>
+    <string name="bottom_nav_label_gallery">Log</string>
 
-    <string name="title_onboarding_page_1">Amazing Title</string>
-    <string name="desc_onboarding_page_1">Amazing Description Text will be here</string>
+    <string name="title_onboarding_page_1">Daily Habit Photo Journal</string>
+    <string name="desc_onboarding_page_1">Habit Hero helps you do your positive habits every day — by creating a photo journal each time you do your habit.</string>
 
-    <string name="btn_get_started">Get Started</string>
+    <string name="title_onboarding_page_2">7-Day Streak Rewards</string>
+    <string name="desc_onboarding_page_2">Habit Hero rewards you with a fun and shareable celebratory comic book cover each time you complete your 7-day streak.</string>
+
+    <string name="title_onboarding_page_3">Choose Your Quests</string>
+    <string name="desc_onboarding_page_3">Select your daily habits to kickstart your journey, or create your own.</string>
+
+    <string name="btn_get_started">Get Started ⚡</string>
+    <string name="btn_create_your_own_quest">Create Your Own Quest ➕</string>
     <string name="btn_restore_purchase">Restore Purchase</string>
     <string name="btn_skip">Skip</string>
     <string name="btn_next">Next</string>
@@ -15,29 +22,31 @@
     <string name="btn_get_premium">Yes, I want Premium</string>
     <string name="btn_maybe_later">Maybe Later</string>
 
-    <string name="title_sign_in">Sign in</string>
-    <string name="title_sign_up">Sign up</string>
-    <string name="title_screen_home">Home</string>
-    <string name="title_screen_gallery">Gallery</string>
-    <string name="title_screen_account">Account</string>
-    <string name="title_screen_profile">Profile</string>
-    <string name="title_screen_generation_result">Result</string>
+    <string name="title_sign_in">Hero Headquarters</string>
+    <string name="title_sign_up">Join the League</string>
+    <string name="title_screen_home">Quests</string>
+    <string name="title_screen_gallery">Tome</string>
+    <string name="title_screen_account">Settings</string>
+    <string name="title_screen_profile">Settings</string>
+    <string name="title_screen_generation_result">Comic Cover</string>
     <string name="title_screen_credits">Credits</string>
 
     <string name="and">and</string>
-    <string name="sign_in_to">Sign in to </string>
-    <string name="sign_up_to">Sign up for </string>
-    <string name="txt_main_action_to_sign_in">Your account</string>
+    <string name="sign_in_to">Enter </string>
+    <string name="sign_up_to">Join </string>
+    <string name="txt_main_action_to_sign_in">Habit Hero</string>
 
-    <string name="auth_switch_to_sign_in">Already have an account?</string>
-    <string name="auth_switch_to_sign_in_action">Sign in</string>
-    <string name="auth_switch_to_sign_up">New here?</string>
-    <string name="auth_switch_to_sign_up_action">Create account</string>
-    <string name="btn_continue_as_guest">Continue as guest</string>
+    <string name="auth_switch_to_sign_in">Already a superhero?</string>
+    <string name="auth_switch_to_sign_in_action">Enter HQ</string>
+    <string name="auth_switch_to_sign_up">New superhero recruit?</string>
+    <string name="auth_switch_to_sign_up_action">Join the League</string>
+    <string name="btn_continue_as_guest">Enter as Guest Hero ⚡</string>
     <string name="auth_user_already_exists_message">Account already exists. Please sign in.</string>
     <string name="auth_continue_as_guest_failed">Failed to continue as guest</string>
 
     <string name="subscriptions">Subscriptions</string>
+    <string name="comic_cover_credits">Comic Cover Credits</string>
+    <string name="refill_credits">Refill Credits</string>
     <string name="logout">Logout</string>
     <string name="help_and_support">Help &amp; Support</string>
     <string name="item_contact_support">Contact Support</string>
@@ -123,45 +132,45 @@
     <string name="paywall_unit_lifetime">lifetime</string>
 
     <!-- Subscriptions screen — fallback when the user has no active plan. -->
-    <string name="subscriptions_plan_free">Free</string>
+    <string name="subscriptions_plan_free">Free Recruit</string>
 
     <!-- Paywall: subscription header copy -->
-    <string name="paywall_sub_title">Get the full app</string>
-    <string name="paywall_sub_subtitle">Every feature unlocked. No ads. No limits.</string>
+    <string name="paywall_sub_title">Unlock Superhero Comic Covers</string>
+    <string name="paywall_sub_subtitle">Mint personalized vintage comic covers starring you for every habit milestone.</string>
 
     <!-- Paywall: subscription feature rows -->
-    <string name="paywall_sub_feature_1">Unlimited access to all features</string>
-    <string name="paywall_sub_feature_2">Priority support</string>
-    <string name="paywall_sub_feature_3">Ad-free experience</string>
-    <string name="paywall_sub_feature_4">New features first</string>
+    <string name="paywall_sub_feature_1">AI vintage superhero comic covers starring you</string>
+    <string name="paywall_sub_feature_2">Up to 40 covers/month with recurring refills</string>
+    <string name="paywall_sub_feature_3">Full face likeness and emotion preservation</string>
+    <string name="paywall_sub_feature_4">High-res sharing for Instagram &amp; Messages</string>
 
     <!-- Paywall: subscription plan card titles (uppercase headline form) -->
     <string name="paywall_sub_plan_daily">1 Day</string>
     <string name="paywall_sub_plan_weekly">1 Week</string>
-    <string name="paywall_sub_plan_monthly">1 Month</string>
+    <string name="paywall_sub_plan_monthly">Hero Monthly</string>
     <string name="paywall_sub_plan_two_months">2 Months</string>
     <string name="paywall_sub_plan_three_months">3 Months</string>
     <string name="paywall_sub_plan_six_months">6 Months</string>
-    <string name="paywall_sub_plan_yearly">1 Year</string>
-    <string name="paywall_sub_plan_lifetime">Lifetime</string>
-    <string name="paywall_sub_plan_unknown">Unknown</string>
+    <string name="paywall_sub_plan_yearly">Hero Annual (Save ~30%)</string>
+    <string name="paywall_sub_plan_lifetime">Lifetime Hero</string>
+    <string name="paywall_sub_plan_unknown">Hero Plan</string>
 
     <!-- Paywall: subscription plan card subtitles -->
     <string name="paywall_sub_subtitle_per_week">%1$s per week</string>
     <string name="paywall_sub_subtitle_one_time">One-time payment</string>
-    <string name="paywall_sub_subtitle_premium_access">Premium access</string>
-    <string name="paywall_sub_subtitle_auto_renews">Auto-renews</string>
+    <string name="paywall_sub_subtitle_premium_access">Comic Cover Access</string>
+    <string name="paywall_sub_subtitle_auto_renews">Auto-renews monthly</string>
 
     <!-- Paywall: reassurance line shown above the CTA. The intro reassurance
          template receives the discount percent and a duration (e.g. "month",
          "3 months") that already includes the count when greater than one. -->
     <string name="paywall_sub_reassurance_trial">No payment required now</string>
-    <string name="paywall_sub_reassurance_cancel">Cancel anytime</string>
+    <string name="paywall_sub_reassurance_cancel">Cancel anytime in Settings</string>
     <string name="paywall_sub_reassurance_intro">Save %1$s%% on your first %2$s</string>
-    <string name="paywall_sub_reassurance_intro_generic">Special intro offer</string>
+    <string name="paywall_sub_reassurance_intro_generic">Special hero offer</string>
 
     <!-- Paywall: subscription CTA -->
-    <string name="paywall_sub_cta_continue">Continue</string>
+    <string name="paywall_sub_cta_continue">Continue ⚡</string>
     <string name="paywall_sub_cta_try_for">Try for %1$s</string>
 
     <!-- Paywall: subscription disclosure -->
@@ -174,30 +183,30 @@
     <string name="paywall_sub_disclosure_then_standard">then standard rate</string>
 
     <!-- Paywall: credit pack -->
-    <string name="paywall_cp_title">Buy credits</string>
-    <string name="paywall_cp_subtitle">One-time purchase. Credits never expire.</string>
-    <string name="paywall_cp_section_title">Pick your pack</string>
-    <string name="paywall_cp_credits_count">%1$d credits</string>
-    <string name="paywall_cp_unit_price">%1$s per credit</string>
+    <string name="paywall_cp_title">Buy Comic Cover Credits</string>
+    <string name="paywall_cp_subtitle">One-time purchase for milestone covers. Credits never expire.</string>
+    <string name="paywall_cp_section_title">Pick your cover pack</string>
+    <string name="paywall_cp_credits_count">%1$d Comic Cover Credits</string>
+    <string name="paywall_cp_unit_price">%1$s per cover</string>
     <string name="paywall_cp_reassurance">No subscription · One-time purchase</string>
-    <string name="paywall_cp_cta_buy">Buy credits</string>
+    <string name="paywall_cp_cta_buy">Buy Comic Credits ⚡</string>
 
     <!-- Credit Balance screen -->
-    <string name="credit_available">Available Credits</string>
-    <string name="credit_status_premium">Premium</string>
-    <string name="credit_status_free">Free Plan</string>
-    <string name="credit_upgrade_title">Upgrade to Premium</string>
-    <string name="credit_upgrade_subtitle">More credits and premium features</string>
-    <string name="credit_top_up_title">Top Up</string>
-    <string name="credit_top_up_subtitle">One-time credit pack</string>
-    <string name="credit_cost_title">1 credit per generation</string>
-    <string name="credit_cost_subtitle">Each AI generation uses one credit.</string>
-    <string name="credit_transaction_history">Transaction History</string>
+    <string name="credit_available">Available Cover Credits</string>
+    <string name="credit_status_premium">Hero Member</string>
+    <string name="credit_status_free">Free Recruit</string>
+    <string name="credit_upgrade_title">Upgrade to Hero Plan</string>
+    <string name="credit_upgrade_subtitle">Get monthly recurring covers &amp; discounts</string>
+    <string name="credit_top_up_title">Top Up Credits</string>
+    <string name="credit_top_up_subtitle">One-time comic cover pack</string>
+    <string name="credit_cost_title">1 credit per comic cover</string>
+    <string name="credit_cost_subtitle">Each AI comic cover generation uses one credit.</string>
+    <string name="credit_transaction_history">Cover Transaction History</string>
     <string name="btn_show">Show</string>
     <string name="btn_hide">Hide</string>
-    <string name="credit_motivational_zero">You’re out of credits, but not out of ideas. Top up and keep creating.</string>
-    <string name="credit_motivational_one">One last credit left — make it count!</string>
-    <string name="credit_motivational_low">Running low on credits. Top up to keep the ideas flowing.</string>
-    <string name="credit_motivational_plenty">You’ve got plenty of credits. Let’s make something amazing!</string>
+    <string name="credit_motivational_zero">You’re out of cover credits! Upgrade your hero plan or top up to mint your next cover.</string>
+    <string name="credit_motivational_one">1 comic cover credit left — make your next milestone count!</string>
+    <string name="credit_motivational_low">Running low on cover credits. Top up to keep minting!</string>
+    <string name="credit_motivational_plenty">You’ve got plenty of cover credits. Keep crushing habits and minting covers!</string>
 
 </resources>

@@ -1,4 +1,4 @@
-rootProject.name = "Koko"
+rootProject.name = "HeroHabit"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

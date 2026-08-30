@@ -10,7 +10,7 @@ Monorepo with three main parts:
 - **Documentation/** — Docusaurus documentation site (git submodule, published at kotlinfoundation.org/kmp-contest-starter-kit-documentation)
 
 Tech stack: Kotlin 2.3.20, Compose Multiplatform 1.10.0, AGP 9.2.0, Gradle 9.4.1, Gradle Kotlin DSL
-Package: `com.kotlinfoundation.koko`
+Package: `com.koko.habittracker`
 
 ## Repository Structure
 
@@ -147,7 +147,7 @@ These three scoped tasks ARE the whole validation. Do not improvise around them:
 ### Test layout
 - Unit / Flow / ViewModel tests: `shared/src/commonTest/kotlin/`. Use `kotlinx-coroutines-test` for `runTest` + `StandardTestDispatcher`/`UnconfinedTestDispatcher`. No Turbine — collect `Flow` emissions via `launch { flow.toList(emissions) }` if needed.
 - Compose UI tests: `shared/src/commonTest/kotlin/` (multiplatform via `runComposeUiTest`, runs on both JVM and Android host) or `shared/src/jvmTest/kotlin/` for JVM-only ones. Screens expose a **pure `(uiState, onUiEvent)` overload** so they render with no ViewModel/Koin — see `SampleComposeUiTest` for the template, and the **`verify-ui`** skill.
-- Screenshot tests (optional, local only — NOT a PR gate, goldens are not committed): **every `@Preview`** under `com.kotlinfoundation.koko` is snapshotted by the parameterized `PreviewScreenshotTest` (`shared/src/androidHostTest/`), which discovers previews via ComposablePreviewScanner. Record with `./gradlew :shared:recordRoborazziAndroidHostTest` → PNGs in `shared/src/androidHostTest/snapshots/`; compare with `./gradlew :shared:verifyRoborazziAndroidHostTest`.
+- Screenshot tests (optional, local only — NOT a PR gate, goldens are not committed): **every `@Preview`** under `com.koko.habittracker` is snapshotted by the parameterized `PreviewScreenshotTest` (`shared/src/androidHostTest/`), which discovers previews via ComposablePreviewScanner. Record with `./gradlew :shared:recordRoborazziAndroidHostTest` → PNGs in `shared/src/androidHostTest/snapshots/`; compare with `./gradlew :shared:verifyRoborazziAndroidHostTest`.
 - Tests run on a **JDK 21** JVM (`tasks.withType<Test>` in `shared/build.gradle.kts`) while code compiles against 17. Robolectric loads real dependency bytecode and `filekit` ≥ 0.14 ships Java 21 class files, so a 17 test JVM fails the preview scan with `UnsupportedClassVersionError`. The foojay resolver provisions the JDK automatically.
 
 ### `@Preview` annotation
@@ -520,7 +520,7 @@ Two interchangeable billing backends live under `libs/subscription/` behind the
   property both (a) selects which module `shared/build.gradle.kts` puts on the classpath
   and (b) drives `AppConfiguration.subscriptionProviderFactory`, which delegates to
   `activeSubscriptionProviderFactory` — a single symbol each provider module exposes in
-  package `com.kotlinfoundation.koko.subscription.config`. Exactly one provider module is ever
+  package `com.koko.habittracker.subscription.config`. Exactly one provider module is ever
   linked, so `AppConfiguration` never names a concrete provider. **Do not hardcode a provider in
   `AppConfiguration`.**
 - Switching providers = change the gradle property only (plus the provider's API keys in
@@ -539,7 +539,7 @@ Two interchangeable billing backends live under `libs/subscription/` behind the
 
 ### Paywall Layer
 
-Location: `shared/src/commonMain/kotlin/com/kotlinfoundation/koko/presentation/screens/paywall/`
+Location: `shared/src/commonMain/kotlin/com/koko/habittracker/presentation/screens/paywall/`
 
 Three-piece architecture that keeps Compose screens display-only:
 
@@ -674,3 +674,32 @@ When implementing screens:
 - For iOS: Xcode + optionally KMM plugin
 - Optional: Run KDoctor to verify environment
 - First run downloads Compose and JetBrains JDK; builds take longer initially
+
+## Critical Lessons & Build Rules
+
+### 1. Xcode Build Phase Scripts (`embedAndSignAppleFrameworkForXcode`)
+- Xcode executes internal Run Script phases in an isolated subshell where `JAVA_HOME` is not set and `/opt/homebrew/bin` is absent from `$PATH`.
+- Any Xcode script phase invoking Gradle (`./gradlew :shared:embedAndSignAppleFrameworkForXcode`) **must explicitly export `JAVA_HOME` and `PATH`** before running `./gradlew`:
+  ```sh
+  export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null || echo "/Library/Java/JavaVirtualMachines/zulu-26.jdk/Contents/Home")
+  export PATH="$JAVA_HOME/bin:$PATH:/opt/homebrew/bin:/usr/local/bin"
+  cd "$SRCROOT/.."
+  ./gradlew :shared:embedAndSignAppleFrameworkForXcode
+  ```
+- Always set `KOTLIN_FRAMEWORK_BUILD_TYPE=debug` in `gradle.properties` to ensure Xcode picks the correct configuration without warning/failure.
+
+### 2. Swift Package Manager (SPM) Dependencies & Simulator Architectures
+- Remote packages (`firebase-ios-sdk`, `GoogleSignIn-iOS`, `GoogleMobileAds`) contain massive prebuilt `.xcframework` binaries and 15+ nested dependencies.
+- Initial downloads can take 2–3 minutes. If Xcode's GUI resolution gets stuck or hangs, resolve via terminal:
+  `xcodebuild -project iosApp.xcodeproj -scheme iosApp -destination 'generic/platform=iOS Simulator' -resolvePackageDependencies`
+- Always configure `"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "x86_64";` and `ONLY_ACTIVE_ARCH = YES;` in `project.pbxproj` so Xcode builds exclusively for `arm64` simulator slices (matching KMP's `iosSimulatorArm64`).
+
+### 3. Agent Tool Execution & User Flow Policy
+- **Never run arbitrary ad-hoc inline shell commands** (e.g. `python3 -c "import gzip..."`) that vary slightly and cause endless permission prompts for the developer.
+- Always use built-in tools (`view_file`, `grep_search`, `replace_file_content`, `find_by_name`, `write_to_file`) which execute silently and reliably.
+
+## Immediate Tasks Post-Reboot ("what is next with Koko")
+1. **Launch iOS App in Simulator**: Run `xcodebuild -project iosApp.xcodeproj -scheme iosApp -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build` and launch via `xcrun simctl launch booted com.koko.habittracker`.
+2. **Fix iOS Goofy Formatting**: Inspect UI layout in iOS simulator and refine Compose modifiers per user's screenshot.
+3. **Investigate Upstream Starter Kit Template**: Compare `https://github.com/KotlinFoundation/kmp-contest-starter-kit` against our resolved setup to document best practices.
+

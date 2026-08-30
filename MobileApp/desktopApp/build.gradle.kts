@@ -14,11 +14,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "com.kotlinfoundation.koko.MainKt"
+        mainClass = "com.dyor.habithero.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.kotlinfoundation.koko"
+            packageName = "com.dyor.habithero"
             packageVersion = "1.0.0"
         }
     }

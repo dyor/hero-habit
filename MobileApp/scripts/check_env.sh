@@ -31,8 +31,8 @@ MOBILE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 LOCAL_PROPS="$MOBILE_DIR/local.properties"
 GRADLE_PROPS="$MOBILE_DIR/gradle.properties"
 # Per-app config (URLs, contact, AI routing, auth toggle) lives in root/AppConfiguration.kt.
-APP_CONFIG="$MOBILE_DIR/shared/src/commonMain/kotlin/com/kotlinfoundation/koko/root/AppConfiguration.kt"
-FEATURE_FLAGS="$MOBILE_DIR/shared/src/commonMain/kotlin/com/kotlinfoundation/koko/data/source/featureflag/FeatureFlagManager.kt"
+APP_CONFIG="$MOBILE_DIR/shared/src/commonMain/kotlin/com/koko/habittracker/root/AppConfiguration.kt"
+FEATURE_FLAGS="$MOBILE_DIR/shared/src/commonMain/kotlin/com/koko/habittracker/data/source/featureflag/FeatureFlagManager.kt"
 GOOGLE_SERVICES="$MOBILE_DIR/androidApp/google-services.json"
 GOOGLE_PLIST="$MOBILE_DIR/iosApp/iosApp/GoogleService-Info.plist"
 
@@ -167,7 +167,7 @@ if phase_active integrations; then
   else
     row ok "google-services.json" "set"
   fi
-  if [ ! -f "$GOOGLE_PLIST" ] || grep -q "PROJECT_ID" "$GOOGLE_PLIST" 2>/dev/null; then
+  if [ ! -f "$GOOGLE_PLIST" ] || grep -q "<string>PROJECT_ID</string>" "$GOOGLE_PLIST" 2>/dev/null; then
     row required "GoogleService-Info.plist" "MISSING/boilerplate" "download YOUR Firebase iOS config -> iosApp/iosApp/GoogleService-Info.plist"
   else
     row ok "GoogleService-Info.plist" "set"

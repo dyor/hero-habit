@@ -1,10 +1,10 @@
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.window.ComposeUIViewController
-import com.kotlinfoundation.koko.root.App
-import com.kotlinfoundation.koko.util.LocalNativeViewFactory
-import com.kotlinfoundation.koko.util.NativeViewFactory
-import com.kotlinfoundation.koko.util.SwiftLibDependencyFactory
-import com.kotlinfoundation.koko.util.swiftLibDependenciesModule
+import com.dyor.habithero.root.App
+import com.dyor.habithero.util.LocalNativeViewFactory
+import com.dyor.habithero.util.NativeViewFactory
+import com.dyor.habithero.util.SwiftLibDependencyFactory
+import com.dyor.habithero.util.swiftLibDependenciesModule
 import org.koin.core.KoinApplication
 import platform.UIKit.UIViewController
 

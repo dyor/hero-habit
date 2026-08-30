@@ -3,97 +3,680 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <meta name="description" content="">
+    <title>HeroHabit — Turn Daily Habits into Superhero Comic Covers</title>
+    <meta name="description" content="Track daily habits, celebrate streaks with a victory selfie, and get personalized vintage superhero comic book covers powered by AI to share with friends.">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Firebase App & Firestore SDKs for real-time lead capture -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
+
+    <!-- Sticky Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
             <div class="logo-container">
-                <img src="images/logo.png" alt="App Logo" class="logo">
-                <span class="app-name"></span>
+                <img src="images/logo.png" alt="HeroHabit Logo" class="logo">
+                <span class="app-name">HeroHabit</span>
             </div>
-            <h1 class="hero-title"></h1>
-            <p class="hero-subtitle"></p>
-            <div class="cta-buttons">
-                <a href="" class="app-store-link" target="_blank" style="display: none;"> 
-                    <img src="images/download_appstore.svg" alt="App Store" class="download-button">
-                </a>
-                <a href="" class="play-store-link" target="_blank" style="display: none;"> 
-                    <img src="images/download_playstore.png" alt="Play Store" class="download-button">
-                </a>
+            <nav class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#features">Features</a>
+                <a href="#showcase">Hall of Heroes</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#why-herohabit">Why It Works</a>
+            </nav>
+            <div class="nav-cta">
+                <a href="#waitlist" class="nav-button">Join Waitlist ⚡</a>
             </div>
         </div>
-        <div class="hero-image">
-            <img src="images/hero.png" alt="App Mockup">
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">⚡ THE HABIT TRACKER THAT REWARDS CONSISTENCY</div>
+                <h1 class="hero-title">Turn Daily Habits Into Superhero Comic Covers</h1>
+                <p class="hero-subtitle">
+                    Build lasting discipline with a habit tracker that rewards your milestones with custom AI-generated vintage comic book covers starring <strong>YOU</strong>. Snap a victory selfie, celebrate streaks, and share your hero covers with friends.
+                </p>
+
+                <!-- Store Links (Commented out per user request until public launch)
+                <div class="cta-buttons" id="download" style="display: none;">
+                    <a href="" class="app-store-link" target="_blank" style="display: none;"> 
+                        <img src="images/download_appstore.svg" alt="Download on App Store" class="download-button">
+                    </a>
+                    <a href="" class="play-store-link" target="_blank" style="display: none;"> 
+                        <img src="images/download_playstore.png" alt="Get it on Google Play" class="download-button">
+                    </a>
+                </div>
+                -->
+
+                <!-- Interactive Hero Waitlist Form & Pricing Survey -->
+                <div class="waitlist-card" id="waitlist">
+                    <div class="waitlist-header">
+                        <span class="waitlist-pill">🚀 VIP EARLY ACCESS</span>
+                        <h3>Join The Founding Hero Waitlist</h3>
+                        <p>Be the first to mint custom comic covers when we launch on your platform.</p>
+                    </div>
+
+                    <!-- Step 1: Email & Platform Choice -->
+                    <form id="hero-waitlist-form" class="waitlist-form" onsubmit="handleWaitlistSubmit(event, 'hero')">
+                        <div class="platform-selector">
+                            <label class="platform-option">
+                                <input type="radio" name="hero-platform" value="iOS" checked>
+                                <span class="platform-btn">🍏 iOS / iPhone</span>
+                            </label>
+                            <label class="platform-option">
+                                <input type="radio" name="hero-platform" value="Android">
+                                <span class="platform-btn">🤖 Android</span>
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="hero-waitlist-email" placeholder="Enter your email address..." required autocomplete="email">
+                            <button type="submit" class="waitlist-submit-btn" id="hero-waitlist-btn">Join Waitlist ⚡</button>
+                        </div>
+                    </form>
+
+                    <!-- Step 2: Pricing Survey (5c, 10c recommended, 15c, 20c, 25c, 50c per cover) -->
+                    <div id="hero-pricing-survey" class="pricing-survey-box" style="display: none;">
+                        <div class="survey-badge">🎉 YOU'RE ON THE WAITLIST!</div>
+                        <h4>Quick question for founding heroes:</h4>
+                        <p class="survey-question">How much would you be willing to pay for a <strong>10-pack</strong> of personalized AI comic book covers?</p>
+                        
+                        <form id="hero-survey-form" onsubmit="handleSurveySubmit(event, 'hero')">
+                            <div class="pricing-options">
+                                <label class="price-chip">
+                                    <input type="radio" name="hero-price" value="5¢/cover ($0.50 for 10)">
+                                    <span class="chip-content">
+                                        <span class="chip-price">5¢ <small>/ cover</small></span>
+                                        <span class="chip-total">$0.50 for 10</span>
+                                    </span>
+                                </label>
+                                <label class="price-chip popular">
+                                    <input type="radio" name="hero-price" value="10¢/cover ($1.00 for 10)" checked>
+                                    <span class="chip-content">
+                                        <span class="chip-price">10¢ <small>/ cover</small></span>
+                                        <span class="chip-total">$1.00 for 10</span>
+                                        <span class="badge-pop">RECOMMENDED</span>
+                                    </span>
+                                </label>
+                                <label class="price-chip">
+                                    <input type="radio" name="hero-price" value="15¢/cover ($1.50 for 10)">
+                                    <span class="chip-content">
+                                        <span class="chip-price">15¢ <small>/ cover</small></span>
+                                        <span class="chip-total">$1.50 for 10</span>
+                                    </span>
+                                </label>
+                                <label class="price-chip">
+                                    <input type="radio" name="hero-price" value="20¢/cover ($2.00 for 10)">
+                                    <span class="chip-content">
+                                        <span class="chip-price">20¢ <small>/ cover</small></span>
+                                        <span class="chip-total">$2.00 for 10</span>
+                                    </span>
+                                </label>
+                                <label class="price-chip">
+                                    <input type="radio" name="hero-price" value="25¢/cover ($2.50 for 10)">
+                                    <span class="chip-content">
+                                        <span class="chip-price">25¢ <small>/ cover</small></span>
+                                        <span class="chip-total">$2.50 for 10</span>
+                                    </span>
+                                </label>
+                                <label class="price-chip">
+                                    <input type="radio" name="hero-price" value="50¢/cover ($5.00 for 10)">
+                                    <span class="chip-content">
+                                        <span class="chip-price">50¢ <small>/ cover</small></span>
+                                        <span class="chip-total">$5.00 for 10</span>
+                                    </span>
+                                </label>
+                            </div>
+                            <button type="submit" class="survey-submit-btn" id="hero-survey-btn">Submit Feedback & Unlock Free Bonus Cover 🚀</button>
+                        </form>
+                    </div>
+
+                    <!-- Step 3: Success Confirmation -->
+                    <div id="hero-survey-success" class="survey-success-box" style="display: none;">
+                        <div class="success-icon">🏆</div>
+                        <h4>You're All Set, Hero!</h4>
+                        <p>Your spot is reserved and your feedback is saved in Firebase. We'll send your invite and <strong>1 free bonus cover</strong> the moment early access begins for your platform!</p>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Personalized AI</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">1-Tap</span>
+                        <span class="stat-label">Friend Sharing</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">0s</span>
+                        <span class="stat-label">Offline-First Speed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Showcase Device -->
+            <div class="hero-showcase">
+                <div class="comic-card-wrapper">
+                    <div class="comic-speech-tag">14 DAY STREAK HERO!</div>
+                    <div class="device-frame">
+                        <img src="images/hero.jpg?v=3" alt="HeroHabit Morning Jog Comic Cover Starring User Selfie" class="hero-cover-img">
+                        <div class="device-overlay">
+                            <div class="overlay-badge">MORNING JOG DAILY</div>
+                            <div class="overlay-streak">🔥 14 Day Streak</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Problem Section -->
-    <section class="section problems-section">
-        <h2></h2> <!-- Dynamically populated -->
-        <p></p> <!-- Dynamically populated -->
-        <div class="grid">
-            <div class="card">
-                <h3></h3>
-                <p></p> <!-- Dynamically populated -->
+    <!-- How It Works Section -->
+    <section class="section how-it-works-section" id="how-it-works">
+        <div class="section-header">
+            <div class="section-badge">THE 3-STEP HERO LOOP</div>
+            <h2>How The Magic Works</h2>
+            <p>From daily discipline to comic book legend in three simple steps.</p>
+        </div>
+
+        <div class="steps-grid">
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-icon">⚡</div>
+                <h3>1. Complete Daily Quests</h3>
+                <p>Check off your daily habits in our ultra-responsive habit tracker. Keep your streak alive for Reading, Running, Meditation, Coding, and more.</p>
             </div>
-            <div class="card">
-                <h3></h3>
-                <p></p> <!-- Dynamically populated -->
+
+            <!-- Step 2 -->
+            <div class="step-card highlight">
+                <div class="step-number">02</div>
+                <div class="step-icon">📸</div>
+                <h3>2. Snap a Daily Selfie</h3>
+                <p>When you finish your habit, snap a selfie to create a journal of your transformation to a sleeker, smarter, happier you.</p>
             </div>
-            <div class="card">
-                <h3></h3>
-                <p></p> <!-- Dynamically populated -->
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-icon">🎨</div>
+                <h3>3. Share Your Streeks</h3>
+                <p>When you hit your 7 day streek, mint a vintage comic book celebrating your achievement that you can share on text, Instagram, Whatsapp, or print it on flyers that you can hand out in your neighborhood.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Showcase / App Screens Section -->
+    <section class="section showcase-section" id="showcase">
+        <div class="section-header">
+            <div class="section-badge">THE APP EXPERIENCE</div>
+            <h2>Inside The Hall of Heroes</h2>
+            <p>See how HeroHabit transforms daily routines into an addictive visual journey.</p>
+        </div>
+
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="showcase-image-box">
+                    <img src="images/screen_quests.png?v=3" alt="Daily Quests Screen">
+                </div>
+                <div class="showcase-info">
+                    <h4>Daily Quest Dashboard</h4>
+                    <p>Track streaks with offline-first Room database storage and instant check-ins.</p>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="showcase-image-box">
+                    <img src="images/screen_celebration.png?v=3" alt="Victory Selfie & Minting Screen">
+                </div>
+                <div class="showcase-info">
+                    <h4>Victory Selfie & Minting</h4>
+                    <p>Snap front-camera victory selfies that power your custom AI superhero covers.</p>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="showcase-image-box">
+                    <img src="images/screen_hall_of_heroes.png?v=3" alt="Hall of Heroes Gallery Screen">
+                </div>
+                <div class="showcase-info">
+                    <h4>Hall of Heroes Gallery</h4>
+                    <p>Browse your complete visual collection of milestone streak comic covers.</p>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="showcase-image-box">
+                    <img src="images/screen_custom_scenario.png?v=3" alt="Custom Action Scenarios Screen">
+                </div>
+                <div class="showcase-info">
+                    <h4>Custom Story Prompts</h4>
+                    <p>Set custom story settings like cyberpunk cities, space stations, or ancient temples.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="section variation2 features-section">
-        <h2></h2> <!-- Dynamically populated -->
-        <div class="grid">
-            <div class="card">
-                <h3></h3>
-                <p></p> <!-- Dynamically populated -->
+    <section class="section features-section" id="features">
+        <div class="section-header">
+            <div class="section-badge">POWERFUL FEATURES</div>
+            <h2>Why Heroes Choose HeroHabit</h2>
+            <p>Everything you need to turn boring daily routines into an epic superhero saga.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎭</div>
+                <h3>Face & Expression Likeness</h3>
+                <p>Advanced AI preserves your real facial features, glasses, smile, and emotion so you truly star on every cover.</p>
             </div>
-            <div class="card">
-                <h3></h3>
-                <p></p> <!-- Dynamically populated -->
+
+            <div class="feature-card">
+                <div class="feature-icon">🌌</div>
+                <h3>Custom Action Scenarios</h3>
+                <p>Personalize your story prompts — reading holographic scrolls in galactic libraries or sprinting neon cyberpunk streets.</p>
             </div>
-            <div class="card">
-                <h3></h3>
-                <p></p> <!-- Dynamically populated -->
+
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Hall of Heroes Gallery</h3>
+                <p>Browse your complete visual collection of milestone covers. Swipe through high-res comic art celebrating your consistency.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📤</div>
+                <h3>One-Tap Social Sharing</h3>
+                <p>Export story-ready comic covers with streak counters directly to Instagram Stories, WhatsApp groups, iMessage, and TikTok.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Offline-First & Fast</h3>
+                <p>Powered by local Room database storage for instant, zero-latency daily check-ins without annoying loading spinners.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Private & Secure AI</h3>
+                <p>Your photos and data are secured through dedicated cloud proxy endpoints without selling your information.</p>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="cta">
-        <h2></h2> <!-- Dynamically populated -->
-        <p></p> <!-- Dynamically populated -->
-        <div class="cta-buttons">
-            <a href="" class="app-store-link" target="_blank" style="display: none;"> 
-                <img src="images/download_appstore.svg" alt="App Store" class="download-button">
-            </a>
-            <a href="" class="play-store-link" target="_blank" style="display: none;"> 
-                <img src="images/download_playstore.png" alt="Play Store" class="download-button">
-            </a>
+    <!-- Why It Works (Problem vs Solution) -->
+    <section class="section comparison-section" id="why-herohabit">
+        <div class="section-header">
+            <div class="section-badge">THE PSYCHOLOGY OF STREAKS</div>
+            <h2>Why Traditional Trackers Fail</h2>
+            <p>Checklists don't give you the emotional dopamine hit to stay consistent when life gets chaotic.</p>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card boring">
+                <div class="comp-header">❌ Standard Habit Apps</div>
+                <ul>
+                    <li><strong>Dry Checklists:</strong> Feels like doing extra homework or spreadsheet chores.</li>
+                    <li><strong>Forgotten Badges:</strong> A '15-day streak' text badge is forgotten in 5 seconds.</li>
+                    <li><strong>Zero Shareability:</strong> Nobody shares a screenshot of a dry checklist.</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card awesome">
+                <div class="comp-header">⚡ HeroHabit Experience</div>
+                <ul>
+                    <li><strong>Epic Rewards:</strong> Minting a custom superhero comic cover is an addictive thrill.</li>
+                    <li><strong>Visual Milestones:</strong> Your victory selfies immortalize your hard work and growth.</li>
+                    <li><strong>Viral Sharing:</strong> Friends love cheering on your personalized superhero covers!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing & Membership Plans Section -->
+    <section class="section pricing-section" id="pricing">
+        <div class="section-header">
+            <div class="section-badge">MEMBERSHIP &amp; COVER PLANS</div>
+            <h2>Choose Your Superhero Plan</h2>
+            <p>Predictable pricing with monthly recurring comic book cover credits. Cancel anytime.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Plan 1: Hero Cadet -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <div class="plan-badge">STARTER RECRUIT</div>
+                    <h3 class="plan-name">Hero Cadet</h3>
+                    <div class="plan-price">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">1.99</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+                    <p class="plan-description">Perfect for heroes building their first consistent daily habit streak.</p>
+                </div>
+                <div class="plan-covers-highlight">
+                    <span class="covers-count">⚡ 10 AI Comic Covers</span>
+                    <span class="covers-sub">Every month (10 cover credits/mo)</span>
+                </div>
+                <ul class="plan-features">
+                    <li>✅ 10 vintage comic covers / month</li>
+                    <li>✅ Full face &amp; expression likeness</li>
+                    <li>✅ Custom story prompt scenarios</li>
+                    <li>✅ Hall of Heroes gallery storage</li>
+                    <li>✅ 1-Tap high-res social sharing</li>
+                    <li>✅ Offline-first habit streak tracking</li>
+                </ul>
+                <a href="#waitlist" class="plan-cta-btn">Join as Hero Cadet ⚡</a>
+            </div>
+
+            <!-- Plan 2: Hero Champion (Featured) -->
+            <div class="pricing-card featured">
+                <div class="featured-ribbon">MOST POPULAR 💥</div>
+                <div class="pricing-header">
+                    <div class="plan-badge featured-badge">HERO FAVORITE</div>
+                    <h3 class="plan-name">Hero Champion</h3>
+                    <div class="plan-price">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">5.99</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+                    <p class="plan-description">For dedicated heroes managing multiple daily habits &amp; quests.</p>
+                </div>
+                <div class="plan-covers-highlight featured-highlight">
+                    <span class="covers-count">⚡ 40 AI Comic Covers</span>
+                    <span class="covers-sub">Every month (40 cover credits/mo)</span>
+                </div>
+                <ul class="plan-features">
+                    <li>✅ 40 vintage comic covers / month</li>
+                    <li>✅ Priority AI generation queue</li>
+                    <li>✅ Full face &amp; expression likeness</li>
+                    <li>✅ Unlimited custom story prompts</li>
+                    <li>✅ Unlimited habit quest tracking</li>
+                    <li>✅ High-res story export &amp; sharing</li>
+                </ul>
+                <a href="#waitlist" class="plan-cta-btn featured-btn">Become a Champion 🚀</a>
+            </div>
+
+            <!-- Plan 3: Hero Champion Annual (Best Value) -->
+            <div class="pricing-card best-value">
+                <div class="featured-ribbon gold-ribbon">BEST VALUE ⭐</div>
+                <div class="pricing-header">
+                    <div class="savings-tag">SAVE ~30% OVER MONTHLY</div>
+                    <h3 class="plan-name">Hero Champion Annual</h3>
+                    <div class="plan-price">
+                        <span class="price-currency">$</span>
+                        <span class="price-val">50.00</span>
+                        <span class="price-period">/ year</span>
+                    </div>
+                    <p class="plan-description">Just $4.16/mo billed annually. Maximize discipline &amp; savings.</p>
+                </div>
+                <div class="plan-covers-highlight best-value-highlight">
+                    <span class="covers-count">⚡ 40 Covers / Month</span>
+                    <span class="covers-sub">480 covers / year ($0.10/cover!)</span>
+                </div>
+                <ul class="plan-features">
+                    <li>✅ 40 vintage comic covers / month (480/yr)</li>
+                    <li>✅ Save $21.88 vs monthly Champion plan</li>
+                    <li>✅ Lowest cost per AI comic cover</li>
+                    <li>✅ VIP Priority generation queue</li>
+                    <li>✅ Unlimited habit quest tracking</li>
+                    <li>✅ All Hero Champion benefits included</li>
+                </ul>
+                <a href="#waitlist" class="plan-cta-btn best-value-btn">Get Annual Savings 🏆</a>
+            </div>
+        </div>
+
+        <!-- Extra One-Time Packs Notice -->
+        <div class="credit-pack-callout">
+            <h4>Need Extra Milestone Covers?</h4>
+            <p>One-time Comic Cover Credit Packs available anytime: <strong>10 Covers ($1.99)</strong> · <strong>40 Covers ($5.99)</strong> · <strong>100 Covers ($12.99)</strong>. Credits never expire.</p>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner / Bottom Waitlist -->
+    <section class="cta-banner">
+        <div class="cta-container">
+            <div class="cta-badge">💥 UNLEASH YOUR INNER SUPERHERO</div>
+            <h2>Become the Hero of Your Daily Routine</h2>
+            <p>Join our priority waitlist today and start turning daily consistency into legendary superhero stories.</p>
+            
+            <div class="waitlist-card bottom-waitlist">
+                <form id="cta-waitlist-form" class="waitlist-form" onsubmit="handleWaitlistSubmit(event, 'cta')">
+                    <div class="platform-selector">
+                        <label class="platform-option">
+                            <input type="radio" name="cta-platform" value="iOS" checked>
+                            <span class="platform-btn">🍏 iOS / iPhone</span>
+                        </label>
+                        <label class="platform-option">
+                            <input type="radio" name="cta-platform" value="Android">
+                            <span class="platform-btn">🤖 Android</span>
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="cta-waitlist-email" placeholder="Enter your email address..." required autocomplete="email">
+                        <button type="submit" class="waitlist-submit-btn" id="cta-waitlist-btn">Join Priority Waitlist ⚡</button>
+                    </div>
+                </form>
+
+                <div id="cta-pricing-survey" class="pricing-survey-box" style="display: none;">
+                    <div class="survey-badge">🎉 YOU'RE ON THE WAITLIST!</div>
+                    <h4>Quick question for founding heroes:</h4>
+                    <p class="survey-question">How much would you pay for a <strong>10-pack</strong> of personalized AI comic covers?</p>
+                    <form id="cta-survey-form" onsubmit="handleSurveySubmit(event, 'cta')">
+                        <div class="pricing-options">
+                            <label class="price-chip">
+                                <input type="radio" name="cta-price" value="5¢/cover ($0.50 for 10)">
+                                <span class="chip-content">
+                                    <span class="chip-price">5¢ <small>/ cover</small></span>
+                                    <span class="chip-total">$0.50 for 10</span>
+                                </span>
+                            </label>
+                            <label class="price-chip popular">
+                                <input type="radio" name="cta-price" value="10¢/cover ($1.00 for 10)" checked>
+                                <span class="chip-content">
+                                    <span class="chip-price">10¢ <small>/ cover</small></span>
+                                    <span class="chip-total">$1.00 for 10</span>
+                                    <span class="badge-pop">RECOMMENDED</span>
+                                </span>
+                            </label>
+                            <label class="price-chip">
+                                <input type="radio" name="cta-price" value="15¢/cover ($1.50 for 10)">
+                                <span class="chip-content">
+                                    <span class="chip-price">15¢ <small>/ cover</small></span>
+                                    <span class="chip-total">$1.50 for 10</span>
+                                </span>
+                            </label>
+                            <label class="price-chip">
+                                <input type="radio" name="cta-price" value="20¢/cover ($2.00 for 10)">
+                                <span class="chip-content">
+                                    <span class="chip-price">20¢ <small>/ cover</small></span>
+                                    <span class="chip-total">$2.00 for 10</span>
+                                </span>
+                            </label>
+                            <label class="price-chip">
+                                <input type="radio" name="cta-price" value="25¢/cover ($2.50 for 10)">
+                                <span class="chip-content">
+                                    <span class="chip-price">25¢ <small>/ cover</small></span>
+                                    <span class="chip-total">$2.50 for 10</span>
+                                </span>
+                            </label>
+                            <label class="price-chip">
+                                <input type="radio" name="cta-price" value="50¢/cover ($5.00 for 10)">
+                                <span class="chip-content">
+                                    <span class="chip-price">50¢ <small>/ cover</small></span>
+                                    <span class="chip-total">$5.00 for 10</span>
+                                </span>
+                            </label>
+                        </div>
+                        <button type="submit" class="survey-submit-btn" id="cta-survey-btn">Submit Feedback & Lock In Bonus Cover 🚀</button>
+                    </form>
+                </div>
+
+                <div id="cta-survey-success" class="survey-success-box" style="display: none;">
+                    <div class="success-icon">🏆</div>
+                    <h4>You're All Set, Hero!</h4>
+                    <p>Your spot is reserved. We'll send your invite as soon as early access opens!</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; <span class="current-year"></span> <span class="app-name"></span>. All rights reserved.</p>
-        <p>
-          <a href="privacy-policy.html" target="_blank">Privacy Policy</a> |
-          <a href="terms-conditions.html" target="_blank">Terms & Conditions</a>
-        </p>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="HeroHabit Logo" class="logo">
+                    <span class="app-name">HeroHabit</span>
+                </div>
+                <p>Turn daily discipline into custom superhero comic books.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Legal & Support</h4>
+                <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+                <a href="terms-conditions.html" target="_blank">Terms & Conditions</a>
+                <a href="mailto:matt@dyor.com" class="contact-email">matt@dyor.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span class="current-year">2026</span> <span class="app-name">HeroHabit</span>. All rights reserved.</p>
+        </div>
     </footer>
+
+    <!-- Firebase & Waitlist Submission Handler -->
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            projectId: "koko-demo-71050",
+            appId: "1:560525802103:web:bb585e7ad94bbb30b56472",
+            storageBucket: "koko-demo-71050.firebasestorage.app",
+            apiKey: "AIzaSyB9cVbHoDr-RwoBc74LKbBu9NwSXJ6x9NM",
+            authDomain: "koko-demo-71050.firebaseapp.com",
+            messagingSenderId: "560525802103",
+            measurementId: "G-N3XS4M2MNK"
+        };
+
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+            }
+        } catch (e) {
+            console.warn("Firebase initialization notice:", e);
+        }
+
+        let currentDocId = null;
+        let waitlistData = { email: '', platform: 'iOS', priceFeedback: '' };
+
+        function handleWaitlistSubmit(e, prefix) {
+            e.preventDefault();
+            const emailInput = document.getElementById(prefix + '-waitlist-email');
+            const platformRadio = document.querySelector('input[name="' + prefix + '-platform"]:checked');
+            const btn = document.getElementById(prefix + '-waitlist-btn');
+            
+            if (!emailInput || !emailInput.value) return;
+            
+            waitlistData.email = emailInput.value.trim().toLowerCase();
+            waitlistData.platform = platformRadio ? platformRadio.value : 'iOS';
+            waitlistData.timestamp = new Date().toISOString();
+            
+            // Create a deterministic safe document ID based on email + timestamp
+            currentDocId = waitlistData.email.replace(/[^a-z0-9]/g, '_') + '_' + Date.now();
+
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = "Saving...";
+            }
+
+            // Save to Firebase Firestore
+            if (db) {
+                db.collection('waitlist').doc(currentDocId).set({
+                    email: waitlistData.email,
+                    platform: waitlistData.platform,
+                    source: prefix,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    clientTimestamp: waitlistData.timestamp,
+                    userAgent: navigator.userAgent
+                }).then(() => {
+                    console.log("✅ Successfully saved waitlist lead to Cloud Firestore:", currentDocId);
+                }).catch(err => {
+                    console.warn("Firestore write error (will keep in localStorage):", err);
+                });
+            }
+
+            // Save to LocalStorage Backup
+            try {
+                const existing = JSON.parse(localStorage.getItem('herohabit_waitlist') || '[]');
+                existing.push({ ...waitlistData, docId: currentDocId });
+                localStorage.setItem('herohabit_waitlist', JSON.stringify(existing));
+            } catch (err) {
+                console.warn('LocalStorage save error', err);
+            }
+
+            // Transition UI: Hide email form and show Pricing Survey
+            const form = document.getElementById(prefix + '-waitlist-form');
+            const survey = document.getElementById(prefix + '-pricing-survey');
+            if (form) form.style.display = 'none';
+            if (survey) survey.style.display = 'block';
+        }
+
+        function handleSurveySubmit(e, prefix) {
+            e.preventDefault();
+            const priceRadio = document.querySelector('input[name="' + prefix + '-price"]:checked');
+            const selectedPrice = priceRadio ? priceRadio.value : '10¢/cover ($1.00 for 10)';
+            const btn = document.getElementById(prefix + '-survey-btn');
+
+            waitlistData.priceFeedback = selectedPrice;
+            waitlistData.surveyTimestamp = new Date().toISOString();
+
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = "Saving...";
+            }
+
+            // Update in Firebase Firestore
+            if (db && currentDocId) {
+                db.collection('waitlist').doc(currentDocId).update({
+                    priceFeedback: selectedPrice,
+                    surveyAnsweredAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    console.log("✅ Successfully updated survey response in Cloud Firestore:", currentDocId);
+                }).catch(err => {
+                    console.warn("Firestore update error:", err);
+                });
+            }
+
+            // Update in LocalStorage
+            try {
+                const existing = JSON.parse(localStorage.getItem('herohabit_waitlist') || '[]');
+                if (existing.length > 0) {
+                    existing[existing.length - 1].priceFeedback = selectedPrice;
+                    localStorage.setItem('herohabit_waitlist', JSON.stringify(existing));
+                }
+            } catch (err) {
+                console.warn('LocalStorage survey update error', err);
+            }
+
+            // Transition UI: Hide survey and show Confirmation
+            const survey = document.getElementById(prefix + '-pricing-survey');
+            const success = document.getElementById(prefix + '-survey-success');
+            if (survey) survey.style.display = 'none';
+            if (success) success.style.display = 'block';
+        }
+    </script>
 
     <script src="updateContent.js"></script>
 

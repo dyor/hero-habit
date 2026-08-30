@@ -15,6 +15,10 @@
     </dict>
     <key>NSCameraUsageDescription</key>
     <string>This app needs camera access so you can take a photo to use in your generation.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app needs photo library access so you can select and save superhero comic book covers.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>This app needs access to save superhero comic book covers to your photo library.</string>
     <key>GIDServerClientID</key>
     <string>YOUR_WEB_CLIENT_ID</string>
 

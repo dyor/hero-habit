@@ -10,14 +10,14 @@ plugins {
 }
 
 android {
-    namespace = "com.kotlinfoundation.koko"
+    namespace = "com.dyor.habithero"
     compileSdk =
         libs.versions.android.compileSdk
             .get()
             .toInt()
 
     defaultConfig {
-        applicationId = "com.kotlinfoundation.koko"
+        applicationId = "com.dyor.habithero"
         minSdk =
             libs.versions.android.minSdk
                 .get()
@@ -26,8 +26,8 @@ android {
             libs.versions.android.compileSdk
                 .get()
                 .toInt()
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

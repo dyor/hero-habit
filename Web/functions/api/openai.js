@@ -22,7 +22,7 @@ const openAiFunctions = {
             ]
         }
     */
-    createTextCompletion: onRequest({secrets: [OPENAI_API_KEY]}, async (req, res) => {
+    createTextCompletion: onRequest({ secrets: [OPENAI_API_KEY], invoker: "public" }, async (req, res) => {
         cors(req, res, async () => {
             if (!await Validation.validateAll(req, res, { requireAuth: true })) return;
             await makeApiRequest("https://api.openai.com/v1/chat/completions", "post", OPENAI_API_KEY.value(), req.body, res);
@@ -39,7 +39,7 @@ const openAiFunctions = {
         }
     */
 
-    createImage: onRequest({secrets: [OPENAI_API_KEY]}, async (req, res) => {
+    createImage: onRequest({ secrets: [OPENAI_API_KEY], invoker: "public" }, async (req, res) => {
         cors(req, res, async () => {
             if (!await Validation.validateAll(req, res, { requireAuth: true })) return;
             await makeApiRequest("https://api.openai.com/v1/images/generations", "post", OPENAI_API_KEY.value(), req.body, res);

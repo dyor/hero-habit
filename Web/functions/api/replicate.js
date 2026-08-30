@@ -34,7 +34,7 @@ const replicateFunctions = {
             "text": "KMPStarterKit.",
         },
     */
-    createPrediction: onRequest({secrets: [REPLICATE_API_KEY]}, async (req, res) => {
+    createPrediction: onRequest({ secrets: [REPLICATE_API_KEY], invoker: "public" }, async (req, res) => {
         cors(req, res, async () => {
             // requireAuth is intentionally true: this endpoint spends the developer's
             // Replicate credits. Without Firebase ID-token auth, anyone who discovers the
@@ -54,7 +54,7 @@ const replicateFunctions = {
         Example request body:
         {
             "input": {
-                "prompt": "black forest gateau cake spelling out the words \\"FLUX 1 . 1 Pro\\", tasty, food photography",
+                "prompt": "black forest gateau cake spelling out the words \"FLUX 1 . 1 Pro\", tasty, food photography",
                 "aspect_ratio": "1:1",
                 "output_format": "webp",
                 "output_quality": 80,
@@ -64,7 +64,7 @@ const replicateFunctions = {
         }
     
     */
-    createModelPrediction: onRequest({secrets: [REPLICATE_API_KEY]}, async (req, res) => {
+    createModelPrediction: onRequest({ secrets: [REPLICATE_API_KEY], invoker: "public" }, async (req, res) => {
         cors(req, res, async () => {
             if (!await Validation.validateAll(req, res, { requireAuth: true })) return;
             if (!validatePathParams(res, { model_owner: req.query.model_owner, model_name: req.query.model_name })) return;
@@ -79,7 +79,7 @@ const replicateFunctions = {
             "id": "prediction_id"
         }
     */
-    getPredictionStatus: onRequest({secrets: [REPLICATE_API_KEY]}, async (req, res) => {
+    getPredictionStatus: onRequest({ secrets: [REPLICATE_API_KEY], invoker: "public" }, async (req, res) => {
         cors(req, res, async () => {
             if (!await Validation.validateAll(req, res, { requirePostRequest: false })) return;
             if (!validatePathParams(res, { id: req.query.id })) return;
@@ -94,7 +94,7 @@ const replicateFunctions = {
             "id": "prediction_id"
         }
     */
-    cancelPrediction: onRequest({secrets: [REPLICATE_API_KEY]}, async (req, res) => {
+    cancelPrediction: onRequest({ secrets: [REPLICATE_API_KEY], invoker: "public" }, async (req, res) => {
         cors(req, res, async () => {
             if (!await Validation.validateAll(req, res)) return;
             if (!validatePathParams(res, { id: req.query.id })) return;
