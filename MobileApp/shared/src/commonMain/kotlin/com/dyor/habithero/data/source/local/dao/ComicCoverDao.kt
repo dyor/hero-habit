@@ -33,6 +33,9 @@ interface ComicCoverDao {
     @Query("UPDATE comic_cover SET habit_title = :habitTitle WHERE habit_id = :habitId")
     suspend fun updateHabitTitleForHabit(habitId: String, habitTitle: String)
 
+    @Query("UPDATE comic_cover SET streak_number = :streakNumber, headline = :headline WHERE id = :id")
+    suspend fun updateStreakNumberAndHeadline(id: String, streakNumber: Int, headline: String)
+
     @Upsert
     suspend fun upsert(entity: ComicCoverEntity)
 

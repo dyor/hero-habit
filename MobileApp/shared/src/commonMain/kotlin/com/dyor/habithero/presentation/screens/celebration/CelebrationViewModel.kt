@@ -45,7 +45,7 @@ class CelebrationViewModel(
 
     private fun observeCreditBalance() = viewModelScope.launch {
         creditRepository.balance.collectLatest { balance ->
-            _uiState.update { it.copy(creditBalance = balance) }
+            _uiState.update { it.copy(creditBalance = balance, isCreditBalanceLoaded = true) }
         }
     }
 
@@ -54,7 +54,8 @@ class CelebrationViewModel(
             is CelebrationUiEvent.Init -> {
                 viewModelScope.launch {
                     val interval = userPreferences.getInt(UserPreferences.KEY_STREAK_CELEBRATION_INTERVAL, 7) ?: 7
-                    val isMilestone = (event.streakCount % interval == 0)
+                    // Guard streakCount > 0: 0 % interval == 0 would otherwise read as a milestone.
+                    val isMilestone = event.streakCount > 0 && (event.streakCount % interval == 0)
                     val nextMilestone = if (isMilestone) event.streakCount + interval else (((event.streakCount / interval) + 1) * interval)
                     val daysLeft = nextMilestone - event.streakCount
 
@@ -77,13 +78,15 @@ class CelebrationViewModel(
                 }
             }
 
-            is CelebrationUiEvent.OnSelfieSelected -> handleSelfieSelected(event.file)
+            is CelebrationUiEvent.OnSelfieSelected -> handleSelfieSelected(event.file, event.forceDailyCheckIn)
 
             CelebrationUiEvent.OnGenerateComicCover -> generateComicCover()
 
             CelebrationUiEvent.OnSaveDailySelfie -> saveDailySelfie()
 
             CelebrationUiEvent.OnDismissOutOfCreditsDialog -> _uiState.update { it.copy(showOutOfCreditsDialog = false) }
+
+            CelebrationUiEvent.OnInsufficientCreditsForCapture -> _uiState.update { it.copy(showOutOfCreditsDialog = true) }
 
             CelebrationUiEvent.OnReset -> _uiState.update { CelebrationUiState() }
         }
@@ -106,7 +109,7 @@ class CelebrationViewModel(
         }
     }
 
-    private fun handleSelfieSelected(file: PlatformFile?) = viewModelScope.launch {
+    private fun handleSelfieSelected(file: PlatformFile?, forceDailyCheckIn: Boolean = false) = viewModelScope.launch {
         if (file == null) return@launch
 
         val originalPath = file.absolutePathCommon()
@@ -124,7 +127,7 @@ class CelebrationViewModel(
                     generationError = null,
                 )
             }
-            if (_uiState.value.isMilestoneCelebration) {
+            if (_uiState.value.isMilestoneCelebration && !forceDailyCheckIn) {
                 generateComicCover()
             } else {
                 saveDailySelfie()

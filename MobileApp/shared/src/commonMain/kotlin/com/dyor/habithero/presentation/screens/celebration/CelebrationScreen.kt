@@ -53,6 +53,7 @@ import com.dyor.habithero.presentation.components.ComicCoverImage
 import com.dyor.habithero.util.StoreScreenshot
 import com.dyor.habithero.util.file.FileManager
 import com.dyor.habithero.util.file.openCameraPicker
+import com.dyor.habithero.root.AppConfiguration
 import io.github.vinceglb.filekit.FileKit
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -107,10 +108,17 @@ fun CelebrationScreen(
     val coroutineScope = rememberCoroutineScope()
     var hasAutoLaunchedCamera by remember { mutableStateOf(false) }
 
-    // Auto-launch camera picker on screen entry if selfie has not been taken yet
-    LaunchedEffect(uiState.habitId) {
-        if (uiState.habitId.isNotBlank() && !hasAutoLaunchedCamera && uiState.selfieFilePath == null && uiState.generatedComicCover == null && !uiState.isDailySelfieSaved) {
+    // Auto-launch camera picker on screen entry if selfie has not been taken yet.
+    // Waits for the credit balance to load, and on milestone days checks credits BEFORE
+    // opening the camera so the user is never asked for a selfie they cannot mint.
+    LaunchedEffect(uiState.habitId, uiState.isCreditBalanceLoaded) {
+        if (uiState.habitId.isNotBlank() && uiState.isCreditBalanceLoaded && !hasAutoLaunchedCamera && uiState.selfieFilePath == null && uiState.generatedComicCover == null && !uiState.isDailySelfieSaved) {
             hasAutoLaunchedCamera = true
+            val needsCredit = uiState.isMilestoneCelebration && AppConfiguration.PREMIUM_FEATURES_ENABLED
+            if (needsCredit && uiState.creditBalance <= 0) {
+                onUiEvent(CelebrationUiEvent.OnInsufficientCreditsForCapture)
+                return@LaunchedEffect
+            }
             val file = FileKit.openCameraPicker()
             if (file != null) {
                 onUiEvent(CelebrationUiEvent.OnSelfieSelected(file))
@@ -149,7 +157,7 @@ fun CelebrationScreen(
                         color = Color.White,
                     )
                     Text(
-                        text = "• Hero Cadet: $1.99/mo (10 covers)\n• Hero Champion: $5.99/mo (40 covers)\n• Hero Annual: $50.00/yr (40 covers/mo, Save ~30%)\n\nOr save your victory selfie check-in now so your streak is never broken!",
+                        text = "• 10 Comic Cover Credits\n• 40 Comic Cover Credits\n• 100 Comic Cover Credits\n\nOr save your victory selfie check-in now so your streak is never broken!",
                         fontSize = 13.sp,
                         color = Color(0xFFA5B4FC),
                     )
@@ -168,7 +176,20 @@ fun CelebrationScreen(
                 OutlinedButton(
                     onClick = {
                         onUiEvent(CelebrationUiEvent.OnDismissOutOfCreditsDialog)
-                        onUiEvent(CelebrationUiEvent.OnSaveDailySelfie)
+                        if (uiState.selfieFilePath == null) {
+                            // Dialog was shown before capture: take the selfie now and log it
+                            // as a plain check-in so the streak is preserved without a credit.
+                            coroutineScope.launch {
+                                val file = FileKit.openCameraPicker()
+                                if (file != null) {
+                                    onUiEvent(CelebrationUiEvent.OnSelfieSelected(file, forceDailyCheckIn = true))
+                                } else {
+                                    onNavigateBack()
+                                }
+                            }
+                        } else {
+                            onUiEvent(CelebrationUiEvent.OnSaveDailySelfie)
+                        }
                     },
                     shape = RoundedCornerShape(12.dp),
                 ) {

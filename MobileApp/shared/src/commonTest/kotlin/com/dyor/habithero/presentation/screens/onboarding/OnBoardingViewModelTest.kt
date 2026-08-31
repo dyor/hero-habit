@@ -210,6 +210,12 @@ private class FakeComicCoverDao : ComicCoverDao {
     override suspend fun getByHabitId(habitId: String): List<ComicCoverEntity> =
         items.value.values.filter { it.habitId == habitId }
 
+    override suspend fun updateStreakNumberAndHeadline(id: String, streakNumber: Int, headline: String) {
+        items.value[id]?.let {
+            items.value = items.value + (id to it.copy(streakNumber = streakNumber, headline = headline))
+        }
+    }
+
     override suspend fun updateCreatedAt(id: String, createdAt: Long) {
         items.value[id]?.let {
             items.value = items.value + (id to it.copy(createdAt = createdAt))

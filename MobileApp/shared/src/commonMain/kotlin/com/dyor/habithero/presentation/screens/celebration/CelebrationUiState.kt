@@ -21,6 +21,7 @@ data class CelebrationUiState(
     val daysUntilNextMilestone: Int = 0,
     val isDailySelfieSaved: Boolean = false,
     val creditBalance: Int = 0,
+    val isCreditBalanceLoaded: Boolean = false,
     val showOutOfCreditsDialog: Boolean = false,
 ) {
     val canGenerate: Boolean get() = !isGenerating && selfieFilePath != null
@@ -28,9 +29,10 @@ data class CelebrationUiState(
 
 sealed interface CelebrationUiEvent {
     data class Init(val habitId: String, val habitTitle: String, val streakCount: Int) : CelebrationUiEvent
-    data class OnSelfieSelected(val file: PlatformFile?) : CelebrationUiEvent
+    data class OnSelfieSelected(val file: PlatformFile?, val forceDailyCheckIn: Boolean = false) : CelebrationUiEvent
     data object OnGenerateComicCover : CelebrationUiEvent
     data object OnSaveDailySelfie : CelebrationUiEvent
     data object OnDismissOutOfCreditsDialog : CelebrationUiEvent
+    data object OnInsufficientCreditsForCapture : CelebrationUiEvent
     data object OnReset : CelebrationUiEvent
 }

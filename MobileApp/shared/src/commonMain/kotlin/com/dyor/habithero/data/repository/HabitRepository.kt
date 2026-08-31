@@ -252,8 +252,9 @@ class HabitRepository(
             testDate = testDate.minus(1, DateTimeUnit.DAY)
         }
 
-        // Calculate best streak
+        // Calculate best streak, and the day-within-its-streak for every entry date.
         val sortedDates = entryDates.sorted()
+        val dayInStreakByDate = mutableMapOf<LocalDate, Int>()
         var maxStreak = 0
         var tempStreak = 0
         var prevDate: LocalDate? = null
@@ -264,10 +265,22 @@ class HabitRepository(
             } else {
                 tempStreak = 1
             }
+            dayInStreakByDate[date] = tempStreak
             if (tempStreak > maxStreak) {
                 maxStreak = tempStreak
             }
             prevDate = date
+        }
+
+        // Entries store their day number at capture time, so back-dating or deleting an
+        // entry leaves neighbouring entries stale. Re-derive it from the real dates.
+        for (entry in entries) {
+            val entryDate = Instant.fromEpochMilliseconds(entry.createdAt).toLocalDateTime(tz).date
+            val day = dayInStreakByDate[entryDate] ?: continue
+            val newHeadline = entry.headline.withStreakDay(day)
+            if (entry.streakNumber != day || entry.headline != newHeadline) {
+                comicCoverDao.updateStreakNumberAndHeadline(entry.id, day, newHeadline)
+            }
         }
 
         val bestStreak = maxOf(habit.bestStreak, maxOf(maxStreak, currentStreak))
@@ -341,5 +354,20 @@ class HabitRepository(
                 }
             }
         }
+    }
+}
+
+/**
+ * Rewrites the day number embedded in a comic cover headline, leaving headlines that carry no
+ * day number (e.g. "Daily Habit Check-In") untouched. Handles both authored formats:
+ * "<Habit> Day 3 Logged!" and "3 Day Streak Hero!".
+ */
+private fun String.withStreakDay(day: Int): String {
+    val dayPrefixed = Regex("""\bDay\s+\d+""")
+    val streakSuffixed = Regex("""\b\d+\s+Day\s+Streak""")
+    return when {
+        dayPrefixed.containsMatchIn(this) -> dayPrefixed.replace(this, "Day $day")
+        streakSuffixed.containsMatchIn(this) -> streakSuffixed.replace(this, "$day Day Streak")
+        else -> this
     }
 }

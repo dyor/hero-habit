@@ -21,6 +21,7 @@ distribution/android/*.aab
 distribution/android/*.apk
 distribution/android/keystore/keystore.properties
 distribution/android/google-service-app-publisher.json
+distribution/android/keystore/*.json
 
 # iOS distribution
 distribution/ios/*.ipa

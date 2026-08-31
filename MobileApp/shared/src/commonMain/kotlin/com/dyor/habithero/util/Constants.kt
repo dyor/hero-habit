@@ -8,7 +8,7 @@ object Constants {
      * - RevenueCat: Entitlement ID
      * - Adapty: Access Level ID
      */
-    const val PAYWALL_PREMIUM_ACCESS = "Premium"
+    const val PAYWALL_PREMIUM_ACCESS = "premium"
 
     /**
      * Credit pack paywall placement identifier.
