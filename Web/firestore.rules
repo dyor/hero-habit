@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /waitlist/{docId} {
+      allow create: if request.resource.data.email is string;
+      allow update: if request.resource.data.email is string;
+      allow read: if false; // Private to admins
+    }
+  }
+}

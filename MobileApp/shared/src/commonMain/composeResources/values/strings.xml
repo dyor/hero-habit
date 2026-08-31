@@ -1,7 +1,7 @@
 <resources>
     <string name="bottom_nav_label_home">Quests</string>
     <string name="bottom_nav_label_profile">Settings</string>
-    <string name="bottom_nav_label_gallery">Log</string>
+    <string name="bottom_nav_label_gallery">Hall</string>
 
     <string name="title_onboarding_page_1">Daily Habit Photo Journal</string>
     <string name="desc_onboarding_page_1">Habit Hero helps you do your positive habits every day — by creating a photo journal each time you do your habit.</string>
@@ -25,7 +25,7 @@
     <string name="title_sign_in">Hero Headquarters</string>
     <string name="title_sign_up">Join the League</string>
     <string name="title_screen_home">Quests</string>
-    <string name="title_screen_gallery">Tome</string>
+    <string name="title_screen_gallery">Hall of Heroes</string>
     <string name="title_screen_account">Settings</string>
     <string name="title_screen_profile">Settings</string>
     <string name="title_screen_generation_result">Comic Cover</string>
