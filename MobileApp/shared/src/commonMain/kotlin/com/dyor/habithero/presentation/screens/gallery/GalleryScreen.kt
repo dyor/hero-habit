@@ -17,9 +17,9 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -53,6 +54,7 @@ import com.dyor.habithero.designsystem.components.LoadingProgressMode
 import com.dyor.habithero.designsystem.components.ScreenWithToolbar
 import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.domain.model.ComicCover
+import com.dyor.habithero.domain.model.HeroRole
 import com.dyor.habithero.presentation.components.ComicCoverImage
 import com.dyor.habithero.util.StoreScreenshot
 import com.dyor.habithero.util.extensions.asFormattedDate
@@ -108,12 +110,12 @@ internal fun GalleryScreen(
                 }
 
                 else -> {
-                    LazyVerticalStaggeredGrid(
-                        columns = StaggeredGridCells.Fixed(2),
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(16.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalItemSpacing = 12.dp,
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
                         itemsIndexed(uiState.comicCovers, key = { _, cover -> cover.id }) { index, cover ->
                             ComicCoverGridCard(
@@ -218,19 +220,28 @@ private fun ComicCoverGridCard(
                 }
             }
 
-            Column(modifier = Modifier.padding(12.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(64.dp)
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                verticalArrangement = Arrangement.Center,
+            ) {
                 Text(
                     text = cover.habitTitle.uppercase(),
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = cover.headline,
-                    fontSize = 13.sp,
+                    fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
                     maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
         }
@@ -618,7 +629,7 @@ private fun GalleryScreenStoreScreenshot_iPhone_en() {
                         streakNumber = 15,
                         headline = "15 Day Streak Hero!",
                         imageUrl = "drawable:cover_read_20_mins",
-                        heroRole = "Superhero",
+                        heroRole = HeroRole.SUPERHERO,
                     ),
                     ComicCover(
                         id = "2",
@@ -627,7 +638,7 @@ private fun GalleryScreenStoreScreenshot_iPhone_en() {
                         streakNumber = 10,
                         headline = "10 Day Streak Hero!",
                         imageUrl = "drawable:cover_pumping_iron",
-                        heroRole = "Superhero",
+                        heroRole = HeroRole.SUPERHERO,
                     ),
                     ComicCover(
                         id = "3",
@@ -636,7 +647,7 @@ private fun GalleryScreenStoreScreenshot_iPhone_en() {
                         streakNumber = 3,
                         headline = "3 Day Streak Hero!",
                         imageUrl = "drawable:cover_meditation",
-                        heroRole = "Superhero",
+                        heroRole = HeroRole.SUPERHERO,
                     ),
                 ),
             ),

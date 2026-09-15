@@ -11,6 +11,7 @@ import com.dyor.habithero.data.source.preferences.UserPreferences
 import com.dyor.habithero.domain.exceptions.CreditRequiredException
 import com.dyor.habithero.domain.exceptions.PurchaseRequiredException
 import com.dyor.habithero.domain.model.ComicCover
+import com.dyor.habithero.domain.model.HeroRole
 import com.dyor.habithero.domain.model.generation.GenerationInput
 import com.dyor.habithero.domain.model.generation.generationInput
 import com.dyor.habithero.root.AppConfiguration
@@ -103,7 +104,7 @@ class CelebrationViewModel(
             streakNumber = state.streakCount,
             headline = "${state.habitTitle} Day ${state.streakCount} Logged!",
             imageUrl = selfieUrl,
-            heroRole = "Hero Check-In",
+            heroRole = HeroRole.HERO_CHECK_IN,
         ).onSuccess { cover ->
             _uiState.update { it.copy(isDailySelfieSaved = true, generatedComicCover = cover) }
         }
@@ -155,7 +156,7 @@ class CelebrationViewModel(
             ""
         }
 
-        val prompt = "Full bleed vertical 9:16 portrait comic book cover, vintage superhero comic book art style, dramatic retro halftone illustration, heroic dynamic action pose. Top masthead banner '${state.habitTitle.uppercase()} DAILY', bold vibrant ribbon '${state.streakCount} DAY STREAK!'. Faithfully preserve the subject's gender identity and natural presentation from the uploaded photo: if the person is a woman or girl, depict a powerful female superhero in the iconic style of Wonder Woman, Superwoman, Spider-Woman, Captain Marvel, or Storm; if the person is a man or boy, depict a heroic male superhero. Retain the exact facial features, likeness, hairstyle elements, recognizable look, and specific facial expression (smile, intensity, gaze, and emotion) of the person in the uploaded selfie photo, seamlessly transforming their face into the superhero protagonist$customScenario. High facial resemblance and subject fidelity, distinctive recognizable face from the photo, full-bleed edge to edge composition, no white borders, no letterboxing, rich vintage comic artwork."
+        val prompt = "Full bleed vertical 9:16 portrait comic book cover, vintage superhero comic book art style, dramatic retro halftone illustration, heroic dynamic action pose. Top masthead banner '${state.habitTitle.uppercase()} DAILY', bold vibrant ribbon with exact text '${state.streakCount} DAY STREAK!' (spelled strictly as S-T-R-E-A-K with 'EA', do not spell as 'streek'). Faithfully preserve the subject's gender identity and natural presentation from the uploaded photo: if the person is a woman or girl, depict a powerful female superhero in the iconic style of Wonder Woman, Superwoman, Spider-Woman, Captain Marvel, or Storm; if the person is a man or boy, depict a heroic male superhero. Retain the exact facial features, likeness, hairstyle elements, recognizable look, and specific facial expression (smile, intensity, gaze, and emotion) of the person in the uploaded selfie photo, seamlessly transforming their face into the superhero protagonist$customScenario. High facial resemblance and subject fidelity, distinctive recognizable face from the photo, correct English typography spelling for 'STREAK', full-bleed edge to edge composition, no white borders, no letterboxing, rich vintage comic artwork."
 
         val input = generationInput {
             stringParam(key = "prompt", value = prompt)
@@ -172,7 +173,7 @@ class CelebrationViewModel(
                     streakNumber = state.streakCount,
                     headline = "${state.streakCount} Day Streak Hero!",
                     imageUrl = imagePath,
-                    heroRole = "Superhero",
+                    heroRole = HeroRole.SUPERHERO,
                 ).onSuccess { comicCover ->
                     _uiState.update {
                         it.copy(

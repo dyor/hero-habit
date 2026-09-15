@@ -1,4 +1,4 @@
-# User Flow — HeroHabit
+# User Flow — Habit Hero
 
 ## Screen Map & Navigation Hierarchy
 

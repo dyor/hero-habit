@@ -1,4 +1,4 @@
-# UI/UX Strategy & Visual Design — HeroHabit
+# UI/UX Strategy & Visual Design — Habit Hero
 
 ## 1. Visual Theme & Aesthetics
 - **Theme**: Bold Comic Book Pop-Art with modern sleek Compose material styling.

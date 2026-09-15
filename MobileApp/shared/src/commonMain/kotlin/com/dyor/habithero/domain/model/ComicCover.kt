@@ -7,6 +7,6 @@ data class ComicCover(
     val streakNumber: Int,
     val headline: String,
     val imageUrl: String,
-    val heroRole: String = "Superhero",
+    val heroRole: String = HeroRole.SUPERHERO,
     val createdAt: Long = 0L,
 )

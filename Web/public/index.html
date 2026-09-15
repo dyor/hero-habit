@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HeroHabit — Turn Daily Habits into Superhero Comic Covers</title>
+    <title>Habit Hero — Turn Daily Habits into Superhero Comic Covers</title>
     <meta name="description" content="Track daily habits, celebrate streaks with a victory selfie, and get personalized vintage superhero comic book covers powered by AI to share with friends.">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,15 +21,15 @@
     <header class="navbar">
         <div class="nav-container">
             <div class="logo-container">
-                <img src="images/logo.png" alt="HeroHabit Logo" class="logo">
-                <span class="app-name">HeroHabit</span>
+                <img src="images/logo.png" alt="Habit Hero Logo" class="logo">
+                <span class="app-name">Habit Hero</span>
             </div>
             <nav class="nav-links">
                 <a href="#how-it-works">How It Works</a>
                 <a href="#features">Features</a>
                 <a href="#showcase">Hall of Heroes</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#why-herohabit">Why It Works</a>
+                <a href="#why-habithero">Why It Works</a>
             </nav>
             <div class="nav-cta">
                 <a href="#waitlist" class="nav-button">Join Waitlist ⚡</a>
@@ -171,7 +171,7 @@
                 <div class="comic-card-wrapper">
                     <div class="comic-speech-tag">14 DAY STREAK HERO!</div>
                     <div class="device-frame">
-                        <img src="images/hero.jpg?v=3" alt="HeroHabit Morning Jog Comic Cover Starring User Selfie" class="hero-cover-img">
+                        <img src="images/hero.jpg?v=3" alt="Habit Hero Morning Jog Comic Cover Starring User Selfie" class="hero-cover-img">
                         <div class="device-overlay">
                             <div class="overlay-badge">MORNING JOG DAILY</div>
                             <div class="overlay-streak">🔥 14 Day Streak</div>
@@ -222,7 +222,7 @@
         <div class="section-header">
             <div class="section-badge">THE APP EXPERIENCE</div>
             <h2>Inside The Hall of Heroes</h2>
-            <p>See how HeroHabit transforms daily routines into an addictive visual journey.</p>
+            <p>See how Habit Hero transforms daily routines into an addictive visual journey.</p>
         </div>
 
         <div class="showcase-grid">
@@ -272,7 +272,7 @@
     <section class="section features-section" id="features">
         <div class="section-header">
             <div class="section-badge">POWERFUL FEATURES</div>
-            <h2>Why Heroes Choose HeroHabit</h2>
+            <h2>Why Heroes Choose Habit Hero</h2>
             <p>Everything you need to turn boring daily routines into an epic superhero saga.</p>
         </div>
 
@@ -316,7 +316,7 @@
     </section>
 
     <!-- Why It Works (Problem vs Solution) -->
-    <section class="section comparison-section" id="why-herohabit">
+    <section class="section comparison-section" id="why-habithero">
         <div class="section-header">
             <div class="section-badge">THE PSYCHOLOGY OF STREAKS</div>
             <h2>Why Traditional Trackers Fail</h2>
@@ -334,7 +334,7 @@
             </div>
 
             <div class="comparison-card awesome">
-                <div class="comp-header">⚡ HeroHabit Experience</div>
+                <div class="comp-header">⚡ Habit Hero Experience</div>
                 <ul>
                     <li><strong>Epic Rewards:</strong> Minting a custom superhero comic cover is an addictive thrill.</li>
                     <li><strong>Visual Milestones:</strong> Your victory selfies immortalize your hard work and growth.</li>
@@ -537,8 +537,8 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <div class="logo-container">
-                    <img src="images/logo.png" alt="HeroHabit Logo" class="logo">
-                    <span class="app-name">HeroHabit</span>
+                    <img src="images/logo.png" alt="Habit Hero Logo" class="logo">
+                    <span class="app-name">Habit Hero</span>
                 </div>
                 <p>Turn daily discipline into custom superhero comic books.</p>
             </div>
@@ -551,7 +551,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span class="current-year">2026</span> <span class="app-name">HeroHabit</span>. All rights reserved.</p>
+            <p>&copy; <span class="current-year">2026</span> <span class="app-name">Habit Hero</span>. All rights reserved.</p>
         </div>
     </footer>
 
@@ -619,9 +619,9 @@
 
             // Save to LocalStorage Backup
             try {
-                const existing = JSON.parse(localStorage.getItem('herohabit_waitlist') || '[]');
+                const existing = JSON.parse(localStorage.getItem('habithero_waitlist') || '[]');
                 existing.push({ ...waitlistData, docId: currentDocId });
-                localStorage.setItem('herohabit_waitlist', JSON.stringify(existing));
+                localStorage.setItem('habithero_waitlist', JSON.stringify(existing));
             } catch (err) {
                 console.warn('LocalStorage save error', err);
             }
@@ -661,10 +661,10 @@
 
             // Update in LocalStorage
             try {
-                const existing = JSON.parse(localStorage.getItem('herohabit_waitlist') || '[]');
+                const existing = JSON.parse(localStorage.getItem('habithero_waitlist') || '[]');
                 if (existing.length > 0) {
                     existing[existing.length - 1].priceFeedback = selectedPrice;
-                    localStorage.setItem('herohabit_waitlist', JSON.stringify(existing));
+                    localStorage.setItem('habithero_waitlist', JSON.stringify(existing));
                 }
             } catch (err) {
                 console.warn('LocalStorage survey update error', err);

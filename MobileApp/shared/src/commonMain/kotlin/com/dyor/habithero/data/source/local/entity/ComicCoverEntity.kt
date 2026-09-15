@@ -6,6 +6,7 @@ import androidx.room3.ColumnInfo
 import androidx.room3.Entity
 import androidx.room3.PrimaryKey
 import com.dyor.habithero.domain.model.ComicCover
+import com.dyor.habithero.domain.model.HeroRole
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
@@ -17,7 +18,7 @@ data class ComicCoverEntity(
     @ColumnInfo("streak_number") val streakNumber: Int = 1,
     @ColumnInfo("headline") val headline: String = "",
     @ColumnInfo("image_url") val imageUrl: String = "",
-    @ColumnInfo("hero_role") val heroRole: String = "Superhero",
+    @ColumnInfo("hero_role") val heroRole: String = HeroRole.SUPERHERO,
     @ColumnInfo("created_at") val createdAt: Long = 0L,
 )
 

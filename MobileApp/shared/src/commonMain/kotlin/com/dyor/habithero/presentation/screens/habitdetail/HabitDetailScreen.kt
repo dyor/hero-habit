@@ -31,6 +31,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,6 +39,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -68,6 +70,7 @@ import com.dyor.habithero.designsystem.generated.resources.UiRes
 import com.dyor.habithero.designsystem.generated.resources.ic_back
 import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.domain.model.ComicCover
+import com.dyor.habithero.domain.model.HeroRole
 import com.dyor.habithero.domain.model.Habit
 import com.dyor.habithero.presentation.components.ComicCoverImage
 import com.dyor.habithero.util.StoreScreenshot
@@ -133,9 +136,11 @@ internal fun HabitDetailScreen(
                     CustomPromptEditorCard(
                         customPrompt = uiState.customPromptInput,
                         isSaving = uiState.isSavingPrompt,
+                        isGenerating = uiState.isGeneratingPrompt,
                         showSuccess = uiState.showSaveSuccessBanner,
                         onPromptChange = { onUiEvent(HabitDetailUiEvent.OnCustomPromptChange(it)) },
                         onSavePrompt = { onUiEvent(HabitDetailUiEvent.OnSaveCustomPrompt) },
+                        onGenerateAiPrompt = { onUiEvent(HabitDetailUiEvent.OnGenerateAiPrompt) },
                     )
                 }
 
@@ -481,7 +486,8 @@ private fun HabitHeaderCard(
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(10.dp))
                     .clickable { onEditTitle() }
-                    .padding(vertical = 2.dp),
+                    .padding(vertical = 2.dp)
+                    .padding(end = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
@@ -495,7 +501,7 @@ private fun HabitHeaderCard(
                     modifier = Modifier
                         .size(32.dp)
                         .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)),
+                        .background(Color(0xFF7F5FFF)),
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(text = "✏️", fontSize = 14.sp)
@@ -530,12 +536,12 @@ private fun HabitHeaderCard(
 
                 Box(
                     modifier = Modifier
-                        .size(28.dp)
+                        .size(32.dp)
                         .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)),
+                        .background(Color(0xFF7F5FFF)),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Text(text = "✏️", fontSize = 12.sp)
+                    Text(text = "✏️", fontSize = 14.sp)
                 }
             }
 
@@ -562,9 +568,11 @@ private fun HabitHeaderCard(
 private fun CustomPromptEditorCard(
     customPrompt: String,
     isSaving: Boolean,
+    isGenerating: Boolean,
     showSuccess: Boolean,
     onPromptChange: (String) -> Unit,
     onSavePrompt: () -> Unit,
+    onGenerateAiPrompt: () -> Unit,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -576,24 +584,29 @@ private fun CustomPromptEditorCard(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(end = 12.dp),
             ) {
                 Text(
-                    text = "🌌 Custom Action Scenario",
+                    text = "Custom Action Scenario",
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                 )
                 Box(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(6.dp))
-                        .background(Color(0xFF6366F1).copy(alpha = 0.2f))
-                        .padding(horizontal = 6.dp, vertical = 2.dp),
+                        .size(32.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFF7F5FFF))
+                        .clickable(enabled = !isGenerating && !isSaving, onClick = onGenerateAiPrompt),
+                    contentAlignment = Alignment.Center,
                 ) {
-                    Text(
-                        text = "AI PROMPT",
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFFA5B4FC),
-                    )
+                    if (isGenerating) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(14.dp),
+                            strokeWidth = 2.dp,
+                            color = Color.White,
+                        )
+                    } else {
+                        Text(text = "✨", fontSize = 14.sp)
+                    }
                 }
             }
 
@@ -1044,7 +1057,7 @@ private fun HabitDetailScreenStoreScreenshot_iPhone_en() {
                         streakNumber = 10,
                         headline = "10 Day Streak Hero!",
                         imageUrl = "drawable:cover_pumping_iron",
-                        heroRole = "Superhero",
+                        heroRole = HeroRole.SUPERHERO,
                     ),
                 ),
                 isLoading = false,

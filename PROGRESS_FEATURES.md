@@ -1,7 +1,7 @@
-# Features — HeroHabit
+# Features — Habit Hero
 
 > [!NOTE]
-> Record of built features for HeroHabit from the PRD (`AiGuidelines/project/prd.md`).
+> Record of built features for Habit Hero from the PRD (`AiGuidelines/project/prd.md`).
 > **Status key:** `[ ]` not started · `[~]` in progress · `[x]` done
 
 **Source of truth:** `AiGuidelines/project/prd.md` · `user_flow.md` · `ui_ux.md`
@@ -18,7 +18,7 @@
 - [x] **Celebration Screen** — selfie picker + custom prompt integration ☑ · Replicate AI generation with 9:16 vertical comic prompt ☑
 - [x] **Hall of Heroes (Gallery Screen)** — 2-column grid ☑ · 100% full-bleed swipeable comic viewer with `HorizontalPager` ☑
 
-## Screens that ship with the kit (branded to HeroHabit)
+## Screens that ship with the kit (branded to Habit Hero)
 - [x] **onboarding** — branded to superhero habit quests
 - [x] **paywall** — monetization toggles disabled (`PREMIUM_FEATURES_ENABLED = false`)
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dyor.habithero.data.source.local.dao.ComicCoverDao
 import com.dyor.habithero.data.source.local.entity.toModel
+import com.dyor.habithero.domain.model.HeroRole
 import com.dyor.habithero.util.logging.AppLogger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,8 +22,11 @@ class GalleryViewModel(
         comicCoverDao.getAllFlow(),
         selectedIndexFlow,
     ) { entities, selectedIndex ->
-        val covers = entities.map { it.toModel() }.filter {
-            it.imageUrl.isNotBlank() && !it.imageUrl.startsWith("selfie:") && !it.imageUrl.startsWith("temp:")
+        val covers = entities.map { it.toModel() }.filter { cover ->
+            cover.imageUrl.isNotBlank() &&
+                !cover.imageUrl.startsWith("selfie:") &&
+                !cover.imageUrl.startsWith("temp:") &&
+                cover.heroRole == HeroRole.SUPERHERO
         }
         GalleryUiState(
             comicCovers = covers,

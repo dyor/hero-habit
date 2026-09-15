@@ -160,6 +160,7 @@ private val presentationModule = module {
             habitId = habitId,
             habitRepository = get(),
             comicCoverDao = get(),
+            openAiApiService = get(),
         )
     }
     // Add new view models below — generate_screen.sh inserts here.

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dyor.habithero.data.repository.HabitRepository
 import com.dyor.habithero.data.source.local.dao.ComicCoverDao
 import com.dyor.habithero.domain.model.Habit
+import com.dyor.habithero.domain.model.HeroRole
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,13 +34,19 @@ class HomeViewModel(
             comicCoverDao.getAllFlow(),
         ) { habitResult, coverEntities ->
             val habitList = habitResult.getOrNull() ?: emptyList()
+            val mintedCovers = coverEntities.filter { cover ->
+                cover.heroRole == HeroRole.SUPERHERO &&
+                    cover.imageUrl.isNotBlank() &&
+                    !cover.imageUrl.startsWith("selfie:") &&
+                    !cover.imageUrl.startsWith("temp:")
+            }
             val coverMap = mutableMapOf<String, String>()
-            for (cover in coverEntities) {
+            for (cover in mintedCovers) {
                 if (!coverMap.containsKey(cover.habitId)) {
                     coverMap[cover.habitId] = cover.imageUrl
                 }
             }
-            val latestOverall = coverEntities.firstOrNull()?.imageUrl
+            val latestOverall = mintedCovers.firstOrNull()?.imageUrl
 
             _uiState.update { current ->
                 current.copy(

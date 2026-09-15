@@ -204,11 +204,9 @@ private class FakeComicCoverDao : ComicCoverDao {
 
     override suspend fun getAll(): List<ComicCoverEntity> = items.value.values.toList()
 
-    override fun getByHabitIdFlow(habitId: String): Flow<List<ComicCoverEntity>> =
-        items.asStateFlow().map { map -> map.values.filter { it.habitId == habitId } }
+    override fun getByHabitIdFlow(habitId: String): Flow<List<ComicCoverEntity>> = items.asStateFlow().map { map -> map.values.filter { it.habitId == habitId } }
 
-    override suspend fun getByHabitId(habitId: String): List<ComicCoverEntity> =
-        items.value.values.filter { it.habitId == habitId }
+    override suspend fun getByHabitId(habitId: String): List<ComicCoverEntity> = items.value.values.filter { it.habitId == habitId }
 
     override suspend fun updateStreakNumberAndHeadline(id: String, streakNumber: Int, headline: String) {
         items.value[id]?.let {

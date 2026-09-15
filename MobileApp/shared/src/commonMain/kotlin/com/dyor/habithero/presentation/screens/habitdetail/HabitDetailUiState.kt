@@ -8,6 +8,7 @@ data class HabitDetailUiState(
     val comicCovers: List<ComicCover> = emptyList(),
     val customPromptInput: String = "",
     val isSavingPrompt: Boolean = false,
+    val isGeneratingPrompt: Boolean = false,
     val showSaveSuccessBanner: Boolean = false,
     val selectedCoverIndex: Int? = null,
     val showEditTitleDialog: Boolean = false,
@@ -24,6 +25,7 @@ data class HabitDetailUiState(
 sealed interface HabitDetailUiEvent {
     data class OnCustomPromptChange(val prompt: String) : HabitDetailUiEvent
     data object OnSaveCustomPrompt : HabitDetailUiEvent
+    data object OnGenerateAiPrompt : HabitDetailUiEvent
     data class OnClickCover(val index: Int) : HabitDetailUiEvent
     data object OnDismissFullScreenCover : HabitDetailUiEvent
     data object OnOpenEditTitleDialog : HabitDetailUiEvent

@@ -9,6 +9,7 @@ import com.dyor.habithero.data.source.local.entity.toEntity
 import com.dyor.habithero.data.source.local.entity.toModel
 import com.dyor.habithero.domain.model.ComicCover
 import com.dyor.habithero.domain.model.Habit
+import com.dyor.habithero.domain.model.HeroRole
 import com.dyor.habithero.util.extensions.asFormattedDate
 import com.dyor.habithero.util.logging.AppLogger
 import kotlinx.coroutines.flow.Flow
@@ -126,7 +127,7 @@ class HabitRepository(
         streakNumber: Int,
         headline: String,
         imageUrl: String,
-        heroRole: String = "Superhero",
+        heroRole: String = HeroRole.SUPERHERO,
     ): Result<ComicCover> = backgroundExecutor.execute {
         val tz = TimeZone.currentSystemDefault()
         val todayDate = Clock.System.now().toLocalDateTime(tz).date

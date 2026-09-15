@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A93A953629CC810C00F8E227"
-               BuildableName = "HeroHabit.app"
+               BuildableName = "Habit Hero.app"
                BlueprintName = "iosApp"
                ReferencedContainer = "container:iosApp.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A93A953629CC810C00F8E227"
-            BuildableName = "HeroHabit.app"
+            BuildableName = "Habit Hero.app"
             BlueprintName = "iosApp"
             ReferencedContainer = "container:iosApp.xcodeproj">
          </BuildableReference>

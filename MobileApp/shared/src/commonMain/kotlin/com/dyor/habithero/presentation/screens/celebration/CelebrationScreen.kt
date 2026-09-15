@@ -50,10 +50,10 @@ import com.dyor.habithero.designsystem.components.ScreenWithToolbar
 import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.domain.model.ComicCover
 import com.dyor.habithero.presentation.components.ComicCoverImage
+import com.dyor.habithero.root.AppConfiguration
 import com.dyor.habithero.util.StoreScreenshot
 import com.dyor.habithero.util.file.FileManager
 import com.dyor.habithero.util.file.openCameraPicker
-import com.dyor.habithero.root.AppConfiguration
 import io.github.vinceglb.filekit.FileKit
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject

@@ -1,7 +1,7 @@
-# Product Requirements Document (PRD) — HeroHabit
+# Product Requirements Document (PRD) — Habit Hero
 
 ## 1. Vision & Core Value Proposition
-**HeroHabit** is a daily habit tracker that turns personal consistency into superhero mythology. When users complete a daily habit entry, the app celebrates their streak by capturing a celebratory selfie and using Replicate AI to transform it into a personalized vintage comic book cover with the user depicted as the superhero of their daily quest (e.g., "7 Day Jog Streak! The Flash of the Suburbs").
+**Habit Hero** is a daily habit tracker that turns personal consistency into superhero mythology. When users complete a daily habit entry, the app celebrates their streak by capturing a celebratory selfie and using Replicate AI to transform it into a personalized vintage comic book cover with the user depicted as the superhero of their daily quest (e.g., "7 Day Jog Streak! The Flash of the Suburbs").
 
 ## 2. Target Audience & Core Use Cases
 - **Audience**: Individuals who want engaging visual motivation to build lasting daily habits (fitness, reading, mindfulness, nutrition).

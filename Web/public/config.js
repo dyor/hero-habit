@@ -1,14 +1,14 @@
 // config.js
 const CONFIG = {
-    APP_NAME: "HeroHabit",
-    DEVELOPER_OR_COMPANY_NAME: "HeroHabit Team",
-    WEBSITE_TITLE: "HeroHabit — Turn Daily Habits into Superhero Comic Covers",
+    APP_NAME: "Habit Hero",
+    DEVELOPER_OR_COMPANY_NAME: "Habit Hero Team",
+    WEBSITE_TITLE: "Habit Hero — Turn Daily Habits into Superhero Comic Covers",
     WEBSITE_DESCRIPTION: "Track daily habits, celebrate streaks with a victory selfie, and get personalized vintage superhero comic book covers powered by AI to share with friends.",
     CONTACT_EMAIL: "matt@dyor.com",
     PRIVACY_POLICY_LAST_UPDATE_DATE: "2026-08-13",
     TERMS_AND_SERVICE_LAST_UPDATE_DATE: "2026-08-13",
-    PLAYSTORE_URL: "https://play.google.com/store/apps/details?id=com.koko.habittracker",
-    APPSTORE_URL: "https://apps.apple.com/app/herohabit/id1234567890",
+    PLAYSTORE_URL: "https://play.google.com/store/apps/details?id=com.dyor.habithero",
+    APPSTORE_URL: "https://apps.apple.com/app/habithero/id1234567890",
 };
 
 const TEXT_CONTENT = {
@@ -27,11 +27,11 @@ const TEXT_CONTENT = {
     STEP2_TITLE: "2. Snap a Daily Selfie",
     STEP2_DESC: "When you finish your habit, snap a selfie to create a journal of your transformation to a sleeker, smarter, happier you.",
     
-    STEP3_TITLE: "3. Share Your Streeks",
-    STEP3_DESC: "When you hit your 7 day streek, mint a vintage comic book celebrating your achievement that you can share on text, Instagram, Whatsapp, or print it on flyers that you can hand out in your neighborhood.",
+    STEP3_TITLE: "3. Share Your Streaks",
+    STEP3_DESC: "When you hit your 7 day streak, mint a vintage comic book celebrating your achievement that you can share on text, Instagram, WhatsApp, or print it on flyers that you can hand out in your neighborhood.",
 
     // Feature Section
-    FEATURE_SECTION_TITLE: "Why Heroes Choose HeroHabit",
+    FEATURE_SECTION_TITLE: "Why Heroes Choose Habit Hero",
     FEATURE_SECTION_SUBTITLE: "Everything you need to turn boring daily routines into an addictive superhero saga.",
     
     FEATURE_CARD_TITLE1: "🎭 Face & Expression Likeness",
@@ -63,9 +63,9 @@ const TEXT_CONTENT = {
     PROBLEM_CARD_TEXT2: "A '15-day streak' badge in standard apps is just a number you forget in 5 minutes.",
     
     PROBLEM_CARD_TITLE3: "❌ Zero Shareability",
-    PROBLEM_CARD_TEXT3: "Nobody shares a screenshot of a spreadsheet — but everyone loves sharing custom comic art!",
+    PROBLEM_CARD_TEXT3: "Nobody shares a spreadsheet — but everyone loves sharing custom comic art!",
 
     // CTA Section
     CTA_SECTION_TITLE: "Become the Hero of Your Daily Routine",
-    CTA_SECTION_TEXT: "Join thousands of daily heroes minting custom comic covers. Download HeroHabit and start your superhero journey today."
+    CTA_SECTION_TEXT: "Join thousands of daily heroes minting custom comic covers. Download Habit Hero and start your superhero journey today."
 };

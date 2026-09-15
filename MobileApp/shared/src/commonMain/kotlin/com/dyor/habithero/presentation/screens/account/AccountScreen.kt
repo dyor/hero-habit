@@ -308,7 +308,7 @@ private fun AddHabitDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(text = "New Hero Quest", fontWeight = FontWeight.Bold) },
+        title = { Text(text = "New Quest", fontWeight = FontWeight.Bold) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 OutlinedTextField(
