@@ -1,0 +1,5 @@
+Initial launch of Habit Hero:
+- Daily habit tracking and photo check-ins
+- AI-generated vintage superhero comic covers for streak milestones
+- Hall of Heroes collection of streak milestone covers
+- 10 starter credits included

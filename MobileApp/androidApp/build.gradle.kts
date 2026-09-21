@@ -17,7 +17,7 @@ android {
             .toInt()
 
     defaultConfig {
-        applicationId = "com.dyor.habithero"
+        applicationId = "com.dyor.habitheroapp"
         minSdk =
             libs.versions.android.minSdk
                 .get()

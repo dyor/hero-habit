@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:560525802103:android:74207e5ba58e7177b56472",
+        "android_client_info": {
+          "package_name": "com.dyor.habitheroapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560525802103-voiu8k09cl2sskrfkv6vvvlj1dsr6jpu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiTBndy7K6Akp-oaGUz6JceGLXIwx3i_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560525802103-voiu8k09cl2sskrfkv6vvvlj1dsr6jpu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "560525802103-8f5ngpkv251ebbmkkm2vp5pinppmtfej.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kotlinfoundation.koko"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:560525802103:android:2fc60f66f5a58aafb56472",
         "android_client_info": {
           "package_name": "com.indieplaybook.app"
@@ -45,7 +81,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:560525802103:android:effc9a94edada79ab56472",
         "android_client_info": {
-          "package_name": "com.dyor.habithero"
+          "package_name": "com.koko.habittracker"
         }
       },
       "oauth_client": [
@@ -53,7 +89,7 @@
           "client_id": "560525802103-qh9pc4rkkolonq4me0uhs0j4l2au424g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.dyor.habithero",
+            "package_name": "com.koko.habittracker",
             "certificate_hash": "393608e6ed550725a324a1063ede90e99f1d58c0"
           }
         },
