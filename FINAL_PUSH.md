@@ -69,7 +69,7 @@ firebase deploy --only functions
      ⚡ HOW IT WORKS:
      1. Complete Your Quests: Log habits daily with zero-latency offline tracking.
      2. Snap a Victory Selfie: Snap a quick photo when you complete your daily routine.
-     3. Mint Your Comic Cover: Hit a 7-day streak and transform your selfie into a custom, high-resolution vintage comic book cover powered by AI!
+     3. Mint Your Comic Cover: Hit an X-day streak and transform your selfie into a custom, high-resolution vintage comic book cover powered by AI!
      4. Hall of Heroes: Collect your milestone covers and share them directly with friends.
 
      Includes 10 starter credits to mint custom comic covers!
