@@ -9,7 +9,7 @@ This document is the **single source of truth** for publishing **Habit Hero** to
 | Property | Value | Notes |
 | :--- | :--- | :--- |
 | **App Name** | `Habit Hero - Daily Habit Tracker` | Full store title (30 chars max on iOS: `Habit Hero: Habit Tracker`) |
-| **Android Package Name / Application ID** | `com.dyor.habithero` | Must be transferred or unique on Google Play |
+| **Android Package Name / Application ID** | `com.dyor.habitheroapp` | Final. Published from the Dyor Labs LLC account (`com.dyor.habithero` stayed with the personal account) |
 | **iOS Bundle Identifier** | `com.dyor.habithero` | Registered in Apple Developer Portal |
 | **Monetization Model** | **Paid App ($0.99 upfront)** + Consumable Credit Refills | Includes 10 Starter Credits with download |
 | **Support Email** | `matt@dyor.com` | Declared in app and store listings |
@@ -43,9 +43,9 @@ firebase deploy --only functions
 ## 🤖 3. Google Play Store Launch Checklist
 
 ### A. Package Name / Account Migration Decision
-> ⚠️ **IMPORTANT:** Google Play package names are globally unique and locked forever to the developer account that first uploads them.
-- **Option 1 (Keep `com.dyor.habithero`):** Submit an official [Google Play App Transfer](https://support.google.com/googleplay/android-developer/answer/6231933) from your old Google Play account to the new account.
-- **Option 2 (New package name):** If not transferring, update `applicationId` in `MobileApp/androidApp/build.gradle.kts` (e.g., `com.dyor.habitheroapp`) and update Firebase/Adapty accordingly.
+> ✅ **DECIDED (2026-09-20): Option 2.** The Play app is `com.dyor.habitheroapp` in the **Dyor Labs LLC** organization account (developer id `7046295222512461008`, app id `4973275812658915597`). `applicationId` in `MobileApp/androidApp/build.gradle.kts`, the Firebase Android client, and Adapty's Android package name all use it. Only the Kotlin namespace and the iOS bundle id remain `com.dyor.habithero`.
+>
+> Uploads go through fastlane `upload_to_play_store` using the `play-publisher@koko-demo-71050.iam.gserviceaccount.com` key at `MobileApp/distribution/android/google-service-app-publisher.json` (gitignored). The upload keystore is `MobileApp/distribution/android/keystore/keystore.jks` (gitignored, alias `upload`, SHA-1 `79:A4:C6:3E:FA:93:5D:CB:EE:BF:09:B5:37:D5:97:04:0F:0A:15:A1`) — back it up.
 
 ---
 
@@ -97,7 +97,7 @@ firebase deploy --only functions
 
 5. **Google Cloud Service Account (for Adapty):**
    * In [Google Cloud Console](https://console.cloud.google.com/), go to **IAM & Admin** $\rightarrow$ **Service Accounts**.
-   * Create service account: `adapty-play-billing@koko-demo-71050.iam.gserviceaccount.com`.
+   * Existing service account: `adapty-access@koko-demo-71050.iam.gserviceaccount.com` (key already uploaded to Adapty).
    * In Google Play Console $\rightarrow$ **Users & permissions** $\rightarrow$ Invite the service account with `Financial data` and `Manage orders and subscriptions` permissions.
    * Generate a **JSON Key** and upload it to Adapty under **App Settings $\rightarrow$ Android SDK**.
 
@@ -204,7 +204,7 @@ firebase deploy --only functions
 ### A. App Settings in Adapty Dashboard ([app.adapty.io](https://app.adapty.io))
 1. Select app **Habit Hero**.
 2. **Android Settings:**
-   * Package Name: `com.dyor.habithero`
+   * Package Name: `com.dyor.habitheroapp`
    * Service Account Key: Upload Google Play Service Account JSON.
 3. **iOS Settings:**
    * Bundle ID: `com.dyor.habithero`

@@ -55,7 +55,7 @@ cd Web && ./sync_web.sh && firebase deploy --only hosting
 ## 3. 📱 Mobile App Release Details
 
 * **App Name:** `Habit Hero`
-* **Android Application ID:** `com.dyor.habithero` (or newly chosen LLC package ID)
+* **Android Application ID:** `com.dyor.habitheroapp` (Dyor Labs LLC Play account; see `FINAL_PUSH.md` §3A)
 * **iOS Bundle Identifier:** `com.dyor.habithero`
 * **Current Version:** `versionCode = 4`, `versionName = "1.0.3"`
 * **Release AAB Path:** `MobileApp/androidApp/build/outputs/bundle/release/androidApp-release.aab`
