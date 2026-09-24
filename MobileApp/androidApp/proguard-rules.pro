@@ -44,3 +44,12 @@
 # Coil & FileKit
 -keep class coil3.** { *; }
 -keep class io.github.vinceglb.filekit.** { *; }
+
+# Room loads its generated <Database>_Impl classes reflectively by name, so R8 must not rename
+# or strip them. Without this the app dies at launch with
+# "Failed to create an instance of <Database>" before any UI is drawn.
+# Covers androidx.room3 (this app's AppDatabase) and androidx.room (WorkManager's WorkDatabase,
+# pulled in transitively by Firebase/Play services).
+-keep class * extends androidx.room.RoomDatabase { <init>(); }
+-keep class * extends androidx.room3.RoomDatabase { <init>(); }
+-keep class **_Impl { <init>(...); }
