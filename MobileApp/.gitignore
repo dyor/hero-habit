@@ -33,3 +33,6 @@ distribution/ios/appstore-publisher.json
 # Canonical SwiftPM artifacts are committed under iosApp/ (Package.resolved +
 # KotlinMultiplatformLinkedPackage); this is transient build output.
 .swiftpm-locks/
+
+# Publisher.app holds this while a publish is in flight
+.publisher.lock
