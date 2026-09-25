@@ -1,0 +1,1 @@
+The Comic Cover Credits screen now has a "No thanks" button, so it is clear you can skip it. Also restores the brand in the home header and fixes a subtitle that was hard to read.
