@@ -93,9 +93,13 @@ fun ConfettiParticlesAnimated(
         // Confetti particles
         repeat(config.particleCount) { index ->
             val infiniteTransition = rememberInfiniteTransition(label = "confetti$index")
-            val startXOffsetFraction = remember(index) { Random.nextFloat() } // 0..1
-            val startYOffsetFraction = remember(index) { Random.nextFloat() } // 0..1
-            val randomColor = remember { config.colors.random() }
+            // Seeded per particle so the layout is stable across runs: an unseeded
+            // Random re-scatters every confetti piece on each composition, which made
+            // the celebration store screenshot differ on every regeneration.
+            val particleRandom = remember(index) { Random(index) }
+            val startXOffsetFraction = remember(index) { particleRandom.nextFloat() } // 0..1
+            val startYOffsetFraction = remember(index) { particleRandom.nextFloat() } // 0..1
+            val randomColor = remember(index) { config.colors[particleRandom.nextInt(config.colors.size)] }
 
             val animatedYOffsetFraction by infiniteTransition.animateFloat(
                 initialValue = startYOffsetFraction,
@@ -186,7 +190,25 @@ fun ConfettiParticlesAnimatedFromBottom(
 
 @Composable
 fun ConfettiParticlesAnimatedFromTop() {
-    val confettiItems = remember { (0..20).map { ConfettiItem() } }
+    val confettiItems =
+        remember {
+            val random = Random(0)
+            val palette =
+                listOf(
+                    Color(0xFFFFD700),
+                    Color(0xFFFF69B4),
+                    Color(0xFF00CED1),
+                    Color(0xFF98FB98),
+                    Color(0xFFFF6347),
+                )
+            (0..20).map {
+                ConfettiItem(
+                    x = random.nextFloat() * 400,
+                    color = palette[random.nextInt(palette.size)],
+                    duration = random.nextInt(2000, 4000),
+                )
+            }
+        }
 
     Box(
         modifier =

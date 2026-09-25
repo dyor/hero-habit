@@ -447,7 +447,9 @@ private fun ComicRevealCard(
                 text = cover.headline,
                 fontWeight = FontWeight.Bold,
                 fontSize = 15.sp,
-                color = Color.White,
+                // Was hardcoded Color.White, which is invisible on the card's light
+                // `surface` background. Follow the theme so it contrasts in both schemes.
+                color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(12.dp))

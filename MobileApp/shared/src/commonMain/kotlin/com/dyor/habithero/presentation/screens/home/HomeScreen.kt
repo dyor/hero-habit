@@ -126,7 +126,7 @@ fun HomeScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "Quests",
+                    text = "Habit Hero Quests",
                     color = Color.White,
                     fontWeight = FontWeight.Black,
                     fontSize = 24.sp,
