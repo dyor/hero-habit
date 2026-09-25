@@ -9,12 +9,10 @@ import com.dyor.habithero.data.source.preferences.UserPreferences
 import com.dyor.habithero.designsystem.components.SettingsItemUiState
 import com.dyor.habithero.designsystem.generated.resources.UiRes
 import com.dyor.habithero.designsystem.generated.resources.ic_coin_credits
-import com.dyor.habithero.designsystem.generated.resources.ic_settings_item_logout
 import com.dyor.habithero.designsystem.generated.resources.ic_settings_item_support_legal
 import com.dyor.habithero.generated.resources.Res
 import com.dyor.habithero.generated.resources.comic_cover_credits
 import com.dyor.habithero.generated.resources.help_and_support
-import com.dyor.habithero.generated.resources.logout
 import com.dyor.habithero.root.AppConfiguration
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,18 +38,8 @@ class AccountViewModel(
         startIcon = UiRes.drawable.ic_settings_item_support_legal,
         textRes = Res.string.help_and_support,
     )
-    private val logoutItem = SettingsItemUiState(
-        startIcon = UiRes.drawable.ic_settings_item_logout,
-        textRes = Res.string.logout,
-        showEndIcon = false,
-    )
 
-    private fun settingsItemsFor(isSignedIn: Boolean): List<SettingsItemUiState> = buildList {
-        // Comic Cover Credits top-up option
-        add(creditsItem)
-        add(supportItem)
-        if (AppConfiguration.AUTH_SOCIAL_LOGIN_ENABLED && isSignedIn) add(logoutItem)
-    }
+    private fun settingsItemsFor(): List<SettingsItemUiState> = listOf(creditsItem, supportItem)
 
     private val _uiState = MutableStateFlow(AccountUiState())
     val uiState: StateFlow<AccountUiState> =
@@ -63,7 +51,7 @@ class AccountViewModel(
             val user = currentUser.getOrNull()
             uiState.copy(
                 user = if (user?.isAnonymous == true && AppConfiguration.AUTH_SOCIAL_LOGIN_ENABLED) null else user,
-                settingsItemList = settingsItemsFor(isSignedIn = user != null),
+                settingsItemList = settingsItemsFor(),
                 showUpgradePremiumBanner = false,
             )
         }.stateIn(viewModelScope, WhileSubscribed(5000), _uiState.value)
@@ -79,24 +67,7 @@ class AccountViewModel(
 
     fun onUiEvent(event: AccountUiEvent) = viewModelScope.launch {
         when (event) {
-            AccountUiEvent.OnLogoutConfirmClick -> {
-                userRepository.logOut()
-                _uiState.update { it.copy(isLogoutDialogVisible = false) }
-            }
-
-            AccountUiEvent.OnLogoutDialogDismiss -> {
-                _uiState.update { it.copy(isLogoutDialogVisible = false) }
-            }
-
-            is AccountUiEvent.OnSettingsItemClick -> {
-                when (event.item.textRes) {
-                    Res.string.logout -> {
-                        _uiState.update { it.copy(isLogoutDialogVisible = true) }
-                    }
-
-                    else -> {}
-                }
-            }
+            is AccountUiEvent.OnSettingsItemClick -> Unit
 
             is AccountUiEvent.OnUpdateCelebrationInterval -> {
                 userPreferences.putInt(UserPreferences.KEY_STREAK_CELEBRATION_INTERVAL, event.interval)

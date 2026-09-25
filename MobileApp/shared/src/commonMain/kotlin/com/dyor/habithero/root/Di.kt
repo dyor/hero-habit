@@ -119,7 +119,7 @@ private val dataModule = module {
     } bind SubscriptionProviderUi::class
 
     // Repositories
-    single { UserRepository(get(), get(), get(), get()) }
+    single { UserRepository(get(), get(), get()) }
     single { SubscriptionRepository(get(), get(), get(), get()) }
     single { GenerationRepository(get(), get(), get(), get(), get(), get(), get()) }
     single { HabitRepository(get(), get(), get()) }

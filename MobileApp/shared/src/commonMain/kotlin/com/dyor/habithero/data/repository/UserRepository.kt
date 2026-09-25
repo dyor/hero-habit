@@ -3,8 +3,6 @@
 package com.dyor.habithero.data.repository
 
 import com.dyor.habithero.data.BackgroundExecutor
-import com.dyor.habithero.data.source.preferences.UserPreferences
-import com.dyor.habithero.data.source.preferences.UserPreferences.Keys.KEY_FIRST_TIME_USER
 import com.dyor.habithero.domain.exceptions.UnAuthorizedException
 import com.dyor.habithero.domain.model.User
 import com.dyor.habithero.util.ApplicationScope
@@ -18,6 +16,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
@@ -30,7 +30,6 @@ import kotlin.time.ExperimentalTime
  */
 class UserRepository(
     private val subscriptionRepository: SubscriptionRepository,
-    private val userPreferences: UserPreferences,
     private val backgroundExecutor: BackgroundExecutor = BackgroundExecutor.IO,
     private val applicationScope: ApplicationScope,
 ) {
@@ -39,6 +38,7 @@ class UserRepository(
         signInAnonymouslyIfNecessary()
     }
 
+    private val signInMutex = Mutex()
     private val authTrigger = MutableStateFlow(Clock.System.now().toEpochMilliseconds())
 
     val currentUser: SharedFlow<Result<User>> =
@@ -57,11 +57,11 @@ class UserRepository(
 
     fun signInAnonymouslyIfNecessary() = applicationScope.launch {
         backgroundExecutor.execute {
-            val isFirstTimeUser = userPreferences.getBoolean(KEY_FIRST_TIME_USER, true)
-            if (KMPAuth.currentUser() == null && isFirstTimeUser) {
-                KMPAuth.signInAnonymously().getOrThrow()
-                userPreferences.putBoolean(KEY_FIRST_TIME_USER, false)
-                AppLogger.d("Signed in anonymously")
+            signInMutex.withLock {
+                if (KMPAuth.currentUser() == null) {
+                    KMPAuth.signInAnonymously().getOrThrow()
+                    AppLogger.d("Signed in anonymously")
+                }
             }
             Result.success(Unit)
         }.onFailure {
@@ -75,8 +75,10 @@ class UserRepository(
     }
 
     suspend fun continueAsGuest(): Result<Unit> = backgroundExecutor.execute {
-        if (KMPAuth.currentUser() == null) {
-            KMPAuth.signInAnonymously().getOrThrow()
+        signInMutex.withLock {
+            if (KMPAuth.currentUser() == null) {
+                KMPAuth.signInAnonymously().getOrThrow()
+            }
         }
         Result.success(Unit)
     }

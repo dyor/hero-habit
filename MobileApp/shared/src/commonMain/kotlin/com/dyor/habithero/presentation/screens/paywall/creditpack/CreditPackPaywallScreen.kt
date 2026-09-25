@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dyor.habithero.designsystem.components.AppButton
+import com.dyor.habithero.designsystem.components.AppCardContainer
 import com.dyor.habithero.designsystem.components.ButtonStyle
 import com.dyor.habithero.designsystem.components.ScreenWithToolbar
 import com.dyor.habithero.designsystem.generated.resources.UiRes
@@ -40,6 +41,9 @@ import com.dyor.habithero.designsystem.generated.resources.ic_coin_credits
 import com.dyor.habithero.designsystem.generated.resources.ic_sparkles
 import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.generated.resources.Res
+import com.dyor.habithero.generated.resources.credit_available
+import com.dyor.habithero.generated.resources.paywall_cp_credits_count
+import com.dyor.habithero.generated.resources.paywall_cp_credits_count_one
 import com.dyor.habithero.generated.resources.paywall_cp_section_title
 import com.dyor.habithero.generated.resources.paywall_cp_subtitle
 import com.dyor.habithero.generated.resources.paywall_cp_title
@@ -51,7 +55,6 @@ import com.dyor.habithero.presentation.screens.paywall.PaywallUiEvent
 import com.dyor.habithero.presentation.screens.paywall.PaywallUiState
 import com.dyor.habithero.root.AppConfiguration
 import com.dyor.habithero.subscription.api.PurchasePackageId
-import com.dyor.habithero.util.StoreDevice
 import com.dyor.habithero.util.StoreScreenshot
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -78,6 +81,7 @@ fun CreditPackPaywallScreen(
                 verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.sectionSpacing),
             ) {
                 Hero()
+                CurrentCreditBalanceCard(creditBalance = uiState.creditBalance)
                 if (uiState.packages.isNotEmpty()) {
                     PackList(
                         packs = uiState.packages,
@@ -132,6 +136,55 @@ private fun Hero() {
             color = AppTheme.colors.text.secondary,
             textAlign = TextAlign.Center,
         )
+    }
+}
+
+// ── Current Credit Balance ───────────────────────────────────────────────────
+
+@Composable
+private fun CurrentCreditBalanceCard(creditBalance: Int) {
+    AppCardContainer(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(44.dp)
+                    .clip(CircleShape)
+                    .background(AppTheme.colors.primary.copy(alpha = 0.15f)),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    painter = painterResource(UiRes.drawable.ic_coin_credits),
+                    contentDescription = null,
+                    tint = AppTheme.colors.primary,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
+                Text(
+                    text = stringResource(Res.string.credit_available),
+                    style = AppTheme.typography.bodySmall,
+                    color = AppTheme.colors.text.secondary,
+                )
+                Text(
+                    text = if (creditBalance == 1) {
+                        stringResource(Res.string.paywall_cp_credits_count_one)
+                    } else {
+                        stringResource(Res.string.paywall_cp_credits_count, creditBalance)
+                    },
+                    style = AppTheme.typography.h6,
+                    fontWeight = FontWeight.Bold,
+                    color = if (creditBalance > 0) AppTheme.colors.text.primary else AppTheme.colors.status.error,
+                )
+            }
+        }
     }
 }
 

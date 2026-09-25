@@ -185,7 +185,8 @@
     <!-- Paywall: credit pack -->
     <string name="paywall_cp_title">Buy Comic Cover Credits</string>
     <string name="paywall_cp_subtitle">One-time purchase for milestone covers. Credits never expire.</string>
-    <string name="paywall_cp_section_title">Pick your cover pack</string>
+    <string name="paywall_cp_section_title">Buy more comic cover credits</string>
+    <string name="paywall_cp_credits_count_one">1 Comic Cover Credit</string>
     <string name="paywall_cp_credits_count">%1$d Comic Cover Credits</string>
     <string name="paywall_cp_unit_price">%1$s per cover</string>
     <string name="paywall_cp_reassurance">No subscription · One-time purchase</string>

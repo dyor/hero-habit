@@ -1,7 +1,6 @@
 package com.dyor.habithero.presentation.screens.account
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -53,17 +52,12 @@ import com.dyor.habithero.designsystem.components.ButtonSize
 import com.dyor.habithero.designsystem.components.ScreenWithToolbar
 import com.dyor.habithero.designsystem.components.SettingItemListContainer
 import com.dyor.habithero.designsystem.components.SmallTitle
-import com.dyor.habithero.designsystem.components.modals.AppModalBottomSheet
 import com.dyor.habithero.designsystem.components.premium.UpgradePremiumBanner
 import com.dyor.habithero.designsystem.components.premium.UpgradePremiumBannerStyle
 import com.dyor.habithero.designsystem.generated.resources.UiRes
-import com.dyor.habithero.designsystem.generated.resources.btn_cancel
-import com.dyor.habithero.designsystem.generated.resources.btn_logout_confirm
 import com.dyor.habithero.designsystem.generated.resources.ic_arrow_right
 import com.dyor.habithero.designsystem.generated.resources.ic_copy_content
 import com.dyor.habithero.designsystem.generated.resources.ic_profile_img_placeholder
-import com.dyor.habithero.designsystem.generated.resources.logout
-import com.dyor.habithero.designsystem.generated.resources.text_logout_confirmation
 import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.domain.model.User
 import com.dyor.habithero.generated.resources.Res
@@ -90,13 +84,6 @@ fun AccountScreen(
     onNavigateSubscriptions: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    if (uiState.isLogoutDialogVisible) {
-        LogoutModalBottomSheet(
-            onConfirm = { viewModel.onUiEvent(AccountUiEvent.OnLogoutConfirmClick) },
-            onDismiss = { viewModel.onUiEvent(AccountUiEvent.OnLogoutDialogDismiss) },
-        )
-    }
 
     AccountScreen(
         modifier = modifier
@@ -456,28 +443,6 @@ private fun ProfileInfoBox(user: User?, onClick: () -> Unit) {
     }
 }
 
-@Composable
-private fun LogoutModalBottomSheet(
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit,
-) {
-    AppModalBottomSheet(
-        title = stringResource(UiRes.string.logout),
-        titleColor = AppTheme.colors.status.error,
-        btnDismissText = stringResource(UiRes.string.btn_cancel),
-        btnConfirmText = stringResource(UiRes.string.btn_logout_confirm),
-        onConfirm = { onConfirm() },
-        onDismiss = { onDismiss() },
-        reverseButtonsOrder = true,
-    ) {
-        Text(
-            text = stringResource(UiRes.string.text_logout_confirmation),
-            textAlign = TextAlign.Center,
-            color = AppTheme.colors.text.primary,
-            style = AppTheme.typography.h5,
-        )
-    }
-}
 
 @Preview
 @Composable

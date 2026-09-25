@@ -16,6 +16,7 @@ data class PaywallUiState(
     val signInActionRequired: Boolean = false,
     val mode: PaywallMode = PaywallMode.SUBSCRIPTION,
     val currentPlacementId: String? = null,
+    val creditBalance: Int = 0,
     /** Text on the buy CTA button (e.g. "Continue", "Try for $0.00", "Buy credits"). */
     val ctaText: UiText = UiText.empty(),
     /**

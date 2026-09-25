@@ -57,11 +57,18 @@ class PaywallViewModel(
     val uiState: StateFlow<PaywallUiState> = _uiState.asStateFlow()
 
     init {
+        observeCreditBalance()
         if (featureFlagManager.getBoolean(FeatureFlagManager.Keys.SHOW_REMOTE_PAYWALL)) {
             // Native Adapty/RC paywall owns its own loading + package fetch.
             _uiState.update { it.copy(isLoading = false) }
         } else {
             fetchPackages()
+        }
+    }
+
+    private fun observeCreditBalance() = viewModelScope.launch {
+        creditRepository.balance.collect { balance ->
+            _uiState.update { it.copy(creditBalance = balance) }
         }
     }
 

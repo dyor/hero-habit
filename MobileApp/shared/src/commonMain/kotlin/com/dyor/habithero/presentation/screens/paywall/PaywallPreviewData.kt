@@ -139,5 +139,6 @@ internal object PaywallPreviewData {
         ctaText = UiText.of("Buy credits"),
         aboveCtaText = UiText.of("No subscription · One-time purchase"),
         mode = PaywallMode.CREDIT_PACK,
+        creditBalance = 10,
     )
 }

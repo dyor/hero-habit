@@ -1,5 +1,6 @@
 package com.dyor.habithero.data.source.remote
 
+import com.dyor.habithero.domain.exceptions.UnAuthorizedException
 import com.dyor.habithero.util.logging.AppLogger
 import com.mmk.kmpauth.core.KMPAuth
 import io.ktor.client.HttpClient
@@ -23,6 +24,9 @@ object HttpClientFactory {
     fun default() = jsonClient().also {
         it.plugin(HttpSend).intercept { request ->
             val userToken = KMPAuth.currentUserIdToken(forceRefresh = true).getOrNull()
+            if (userToken.isNullOrBlank()) {
+                throw UnAuthorizedException()
+            }
             request.header("Authorization", "Bearer $userToken")
             execute(request)
         }
