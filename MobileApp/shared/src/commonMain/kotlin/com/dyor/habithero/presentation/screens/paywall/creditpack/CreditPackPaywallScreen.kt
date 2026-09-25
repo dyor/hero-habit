@@ -41,6 +41,7 @@ import com.dyor.habithero.designsystem.generated.resources.ic_coin_credits
 import com.dyor.habithero.designsystem.generated.resources.ic_sparkles
 import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.generated.resources.Res
+import com.dyor.habithero.generated.resources.btn_no_thanks
 import com.dyor.habithero.generated.resources.credit_available
 import com.dyor.habithero.generated.resources.paywall_cp_credits_count
 import com.dyor.habithero.generated.resources.paywall_cp_credits_count_one
@@ -95,6 +96,7 @@ fun CreditPackPaywallScreen(
                 ctaText = uiState.ctaText.value,
                 aboveCtaText = uiState.aboveCtaText.value,
                 onBuy = { onUiEvent(PaywallUiEvent.OnClickBuy) },
+                onDecline = onDismiss,
             )
         }
     }
@@ -309,6 +311,7 @@ private fun StickyBuyFooter(
     ctaText: String,
     aboveCtaText: String,
     onBuy: () -> Unit,
+    onDecline: () -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
@@ -325,6 +328,15 @@ private fun StickyBuyFooter(
             style = ButtonStyle.PRIMARY,
             enabled = buyButtonEnabled,
             onClick = onBuy,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(modifier = Modifier.height(AppTheme.spacing.groupedVerticalElementSpacing))
+        // Credits are optional, not a wall: give the same exit as the close icon somewhere
+        // people will actually look for it, in grey so it does not compete with the CTA.
+        AppButton(
+            text = stringResource(Res.string.btn_no_thanks),
+            style = ButtonStyle.SECONDARY,
+            onClick = onDecline,
             modifier = Modifier.fillMaxWidth(),
         )
         Spacer(modifier = Modifier.height(AppTheme.spacing.defaultSpacing))

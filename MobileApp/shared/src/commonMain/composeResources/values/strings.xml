@@ -21,6 +21,7 @@
     <string name="btn_cancel">Cancel</string>
     <string name="btn_get_premium">Yes, I want Premium</string>
     <string name="btn_maybe_later">Maybe Later</string>
+    <string name="btn_no_thanks">No thanks</string>
 
     <string name="title_sign_in">Hero Headquarters</string>
     <string name="title_sign_up">Join the League</string>

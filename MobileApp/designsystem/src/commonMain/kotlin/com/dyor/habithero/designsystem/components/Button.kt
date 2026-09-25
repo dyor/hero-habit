@@ -39,6 +39,10 @@ import org.jetbrains.compose.resources.painterResource
 enum class ButtonStyle {
     PRIMARY,
     ALTERNATIVE,
+
+    /** Neutral grey. For an opt-out sitting next to a primary action, where the
+     *  purple of ALTERNATIVE would still read as something we want tapped. */
+    SECONDARY,
     TEXT,
 }
 
@@ -78,12 +82,14 @@ fun AppButton(
             when (style) {
                 ButtonStyle.PRIMARY -> AppTheme.colors.primary
                 ButtonStyle.ALTERNATIVE -> AppTheme.colors.alternative
+                ButtonStyle.SECONDARY -> AppTheme.colors.outline
                 ButtonStyle.TEXT -> Color.Transparent
             },
             contentColor =
             when (style) {
                 ButtonStyle.PRIMARY -> AppTheme.colors.onPrimary
                 ButtonStyle.ALTERNATIVE -> AppTheme.colors.onAlternative
+                ButtonStyle.SECONDARY -> AppTheme.colors.text.primary
                 ButtonStyle.TEXT -> AppTheme.colors.primary
             },
         )
@@ -200,6 +206,7 @@ internal fun AppButtonPreviews() {
             endIcon = UiRes.drawable.ic_crown,
         )
         AppButton("Alternative Enabled", style = ButtonStyle.ALTERNATIVE, onClick = {})
+        AppButton("Secondary Enabled", style = ButtonStyle.SECONDARY, onClick = {})
 
         CircularActionButton(icon = UiRes.drawable.ic_crown, text = "Action")
         CircularActionButton(
