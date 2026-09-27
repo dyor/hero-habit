@@ -26,8 +26,8 @@ android {
             libs.versions.android.compileSdk
                 .get()
                 .toInt()
-        versionCode = 8
-        versionName = "1.0.4"
+        versionCode = 9
+        versionName = "1.0.5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
