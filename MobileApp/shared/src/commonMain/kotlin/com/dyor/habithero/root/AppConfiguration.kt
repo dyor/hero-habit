@@ -20,7 +20,7 @@ object AppConfiguration {
     const val URL_TERMS_CONDITIONS = "https://koko-demo-71050.web.app/habit-hero/terms-conditions.html"
 
     // Marketing landing page, linked from Help & Support.
-    const val URL_WEBSITE = "https://koko-demo-71050.web.app/"
+    const val URL_WEBSITE = "https://koko-demo-71050.web.app/habit-hero/"
 
     // Real support email
     const val CONTACT_EMAIL = "matt@dyor.com"

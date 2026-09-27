@@ -12,7 +12,8 @@ Because Firebase Hosting deploys are atomic (a deploy from one repo wipes out fi
 
 ### URL Mapping on `https://koko-demo-71050.web.app`:
 * **Habit Hero:**
-  * 🏠 Main Landing Page: `https://koko-demo-71050.web.app/` (uses `index.html` + `config.js`)
+  * 🏠 Landing Page: `https://koko-demo-71050.web.app/habit-hero/` (`habit-hero/index.html` + `habit-hero/config.js`)
+  * The site root `https://koko-demo-71050.web.app/` is a small app picker (`index.html`) linking to both apps
   * 📄 Privacy Policy: `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html`
   * ⚖️ Terms & Conditions: `https://koko-demo-71050.web.app/habit-hero/terms-conditions.html`
 * **Indie Playbook:**
@@ -28,7 +29,7 @@ A dedicated shell script `sync_web.sh` is placed in the `Web/` folder of **both*
 
 ### What it does:
 1. Copies Indie Playbook's root legal files (`privacy-policy.html`, `terms-conditions.html`, `config-indie.js`, `updateContent-indie.js`) into Habit Hero's `Web/public/`.
-2. Copies Habit Hero's landing page (`index.html`, `styles.css`, `config.js`, `updateContent.js`, `404.html`), `images/`, and the isolated `/habit-hero/` folder into Indie Playbook's `Web/public/`.
+2. Copies the root app picker (`index.html`), `404.html`, and the isolated `/habit-hero/` folder (landing page, legal pages, images) into Indie Playbook's `Web/public/`.
 3. Ensures that deploying from **either** project results in all 5 URLs remaining live and intact.
 
 ---
@@ -41,7 +42,7 @@ Whenever you or an agent make changes to legal policies, config files, or landin
 cd ../Web && ./sync_web.sh && firebase deploy --only hosting
 ```
 
-### If you are in the repository root (`HabitHero/` or `indie-playbook/`):
+### If you are in the repository root (`habit-hero/` or `IndiePlaybook/`):
 ```bash
 cd Web && ./sync_web.sh && firebase deploy --only hosting
 ```

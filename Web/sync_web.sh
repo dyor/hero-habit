@@ -6,9 +6,14 @@
 # are synchronized. This prevents deployments in one repository from deleting or
 # overwriting the other app's assets on the shared Firebase Hosting domain.
 
-# Paths (absolute for robust multi-repository operations)
-HABIT_HERO_WEB="/Users/mattdyor/DyorProjects/kmp/habit-hero/Web/public"
-INDIE_PLAYBOOK_WEB="/Users/mattdyor/DyorProjects/kmp/IndiePlaybook/Web/public"
+# Derive paths relative to this script, allowing environment variable overrides
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Both repos sit side by side, e.g. ~/DyorProjects/kmp/{habit-hero,IndiePlaybook}, so this
+# same script works from either repo.
+PROJECTS_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
+HABIT_HERO_WEB="${HABIT_HERO_WEB:-"$PROJECTS_DIR/habit-hero/Web/public"}"
+INDIE_PLAYBOOK_WEB="${INDIE_PLAYBOOK_WEB:-"$PROJECTS_DIR/IndiePlaybook/Web/public"}"
 
 echo "⏳ Starting Web Synchronization..."
 
@@ -43,23 +48,15 @@ if [ -d "$INDIE_PLAYBOOK_WEB/indie-playbook" ]; then
 fi
 
 # ==============================================================================
-# 2. Sync Habit Hero (Landing Page, Subdirectory & Assets) -> Indie Playbook
+# 2. Sync Habit Hero (Root Pages & /habit-hero/) -> Indie Playbook
 # ==============================================================================
 echo "🔹 Syncing Habit Hero -> Indie Playbook..."
 
-# Copy Habit Hero root landing pages
+# Copy the shared root pages (the app picker at / and the 404 page)
 [ -f "$HABIT_HERO_WEB/index.html" ] && cp "$HABIT_HERO_WEB/index.html" "$INDIE_PLAYBOOK_WEB/index.html"
-[ -f "$HABIT_HERO_WEB/styles.css" ] && cp "$HABIT_HERO_WEB/styles.css" "$INDIE_PLAYBOOK_WEB/styles.css"
-[ -f "$HABIT_HERO_WEB/config.js" ] && cp "$HABIT_HERO_WEB/config.js" "$INDIE_PLAYBOOK_WEB/config.js"
-[ -f "$HABIT_HERO_WEB/updateContent.js" ] && cp "$HABIT_HERO_WEB/updateContent.js" "$INDIE_PLAYBOOK_WEB/updateContent.js"
 [ -f "$HABIT_HERO_WEB/404.html" ] && cp "$HABIT_HERO_WEB/404.html" "$INDIE_PLAYBOOK_WEB/404.html"
 
-# Sync Habit Hero images
-if [ -d "$HABIT_HERO_WEB/images" ]; then
-    rsync -av --delete "$HABIT_HERO_WEB/images/" "$INDIE_PLAYBOOK_WEB/images/"
-fi
-
-# Sync Habit Hero isolated subfolder (/habit-hero/)
+# Sync Habit Hero isolated subfolder (/habit-hero/ landing page, legal pages and images)
 if [ -d "$HABIT_HERO_WEB/habit-hero" ]; then
     mkdir -p "$INDIE_PLAYBOOK_WEB/habit-hero"
     rsync -av --delete "$HABIT_HERO_WEB/habit-hero/" "$INDIE_PLAYBOOK_WEB/habit-hero/"
