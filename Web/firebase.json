@@ -1,6 +1,18 @@
 {
   "hosting": {
     "public": "public",
+    "redirects": [
+      {
+        "source": "/herohabit/:path*",
+        "destination": "/habit-hero/:path",
+        "type": 301
+      },
+      {
+        "source": "/playbook.html",
+        "destination": "/indie-playbook/",
+        "type": 301
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",

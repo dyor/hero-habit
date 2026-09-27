@@ -6,15 +6,15 @@ description: Synchronizes and deploys shared web and legal assets between peer a
 # Shared Web & Legal Pages Sync (`shared-web-sync`)
 
 ## Context & Architecture
-Both **Habit Hero** (`/Users/mattdyor/StudioProjects/HabitHero`) and **Indie Playbook** (`/Users/mattdyor/StudioProjects/indie-playbook`) share the same Firebase Hosting project: **`koko-demo-71050`**.
+Both **Habit Hero** (`/Users/mattdyor/DyorProjects/kmp/habit-hero`) and **Indie Playbook** (`/Users/mattdyor/DyorProjects/kmp/IndiePlaybook`) share the same Firebase Hosting project: **`koko-demo-71050`**.
 
 Because Firebase Hosting deploys are atomic (a deploy from one repo wipes out files that only exist in that repo), both repos share a synchronized `Web/public` directory structure so neither app's deployment breaks the other.
 
 ### URL Mapping on `https://koko-demo-71050.web.app`:
 * **Habit Hero:**
   * 🏠 Main Landing Page: `https://koko-demo-71050.web.app/` (uses `index.html` + `config.js`)
-  * 📄 Privacy Policy: `https://koko-demo-71050.web.app/herohabit/privacy-policy.html`
-  * ⚖️ Terms & Conditions: `https://koko-demo-71050.web.app/herohabit/terms-conditions.html`
+  * 📄 Privacy Policy: `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html`
+  * ⚖️ Terms & Conditions: `https://koko-demo-71050.web.app/habit-hero/terms-conditions.html`
 * **Indie Playbook:**
   * 📄 Privacy Policy: `https://koko-demo-71050.web.app/privacy-policy.html` (uses `config-indie.js` + `updateContent-indie.js`)
   * ⚖️ Terms & Conditions: `https://koko-demo-71050.web.app/terms-conditions.html` (uses `config-indie.js` + `updateContent-indie.js`)
@@ -23,12 +23,12 @@ Because Firebase Hosting deploys are atomic (a deploy from one repo wipes out fi
 
 ## The Synchronization Mechanism
 A dedicated shell script `sync_web.sh` is placed in the `Web/` folder of **both** repositories:
-* `/Users/mattdyor/StudioProjects/HabitHero/Web/sync_web.sh`
-* `/Users/mattdyor/StudioProjects/indie-playbook/Web/sync_web.sh`
+* `/Users/mattdyor/DyorProjects/kmp/habit-hero/Web/sync_web.sh`
+* `/Users/mattdyor/DyorProjects/kmp/IndiePlaybook/Web/sync_web.sh`
 
 ### What it does:
 1. Copies Indie Playbook's root legal files (`privacy-policy.html`, `terms-conditions.html`, `config-indie.js`, `updateContent-indie.js`) into Habit Hero's `Web/public/`.
-2. Copies Habit Hero's landing page (`index.html`, `styles.css`, `config.js`, `updateContent.js`, `404.html`), `images/`, and the isolated `/herohabit/` folder into Indie Playbook's `Web/public/`.
+2. Copies Habit Hero's landing page (`index.html`, `styles.css`, `config.js`, `updateContent.js`, `404.html`), `images/`, and the isolated `/habit-hero/` folder into Indie Playbook's `Web/public/`.
 3. Ensures that deploying from **either** project results in all 5 URLs remaining live and intact.
 
 ---

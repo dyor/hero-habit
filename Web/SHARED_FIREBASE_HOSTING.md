@@ -15,8 +15,8 @@ To solve this, both projects maintain a synchronized `public/` directory with is
 | App | Purpose | Live URL | Source Files |
 | :--- | :--- | :--- | :--- |
 | **Habit Hero** | 🏠 Main Landing Page | `https://koko-demo-71050.web.app/` | `index.html`, `styles.css`, `config.js`, `updateContent.js`, `images/` |
-| **Habit Hero** | 📄 Privacy Policy | `https://koko-demo-71050.web.app/herohabit/privacy-policy.html` | `herohabit/privacy-policy.html`, `herohabit/config.js` |
-| **Habit Hero** | ⚖️ Terms & Conditions | `https://koko-demo-71050.web.app/herohabit/terms-conditions.html` | `herohabit/terms-conditions.html`, `herohabit/config.js` |
+| **Habit Hero** | 📄 Privacy Policy | `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html` | `habit-hero/privacy-policy.html`, `habit-hero/config.js` |
+| **Habit Hero** | ⚖️ Terms & Conditions | `https://koko-demo-71050.web.app/habit-hero/terms-conditions.html` | `habit-hero/terms-conditions.html`, `habit-hero/config.js` |
 | **Indie Playbook** | 📄 Privacy Policy | `https://koko-demo-71050.web.app/privacy-policy.html` | `privacy-policy.html`, `config-indie.js`, `updateContent-indie.js` |
 | **Indie Playbook** | ⚖️ Terms & Conditions | `https://koko-demo-71050.web.app/terms-conditions.html` | `terms-conditions.html`, `config-indie.js`, `updateContent-indie.js` |
 | **Indie Playbook** | 📖 Interactive Playbook | `https://koko-demo-71050.web.app/playbook.html` | `playbook.html`, `styles-indie.css` |
@@ -32,7 +32,7 @@ A synchronization script, **`sync_web.sh`**, exists in the `Web/` directory of *
 
 ### What `sync_web.sh` Does:
 1. Copies all **Indie Playbook** assets (`privacy-policy.html`, `terms-conditions.html`, `config-indie.js`, `updateContent-indie.js`, `playbook.html`, `styles-indie.css`, `indie-apps.html`) into Habit Hero's `Web/public/`.
-2. Copies all **Habit Hero** assets (`index.html`, `styles.css`, `config.js`, `updateContent.js`, `404.html`, `images/`, and the isolated `herohabit/` folder) into Indie Playbook's `Web/public/`.
+2. Copies all **Habit Hero** assets (`index.html`, `styles.css`, `config.js`, `updateContent.js`, `404.html`, `images/`, and the isolated `habit-hero/` folder) into Indie Playbook's `Web/public/`.
 3. Ensures that whichever repository you deploy from, all pages for **both** apps remain active and intact.
 
 ---

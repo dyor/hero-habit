@@ -14,10 +14,13 @@ import com.dyor.habithero.subscription.config.activeSubscriptionProviderFactory
 object AppConfiguration {
 
     // Live privacy policy URL
-    const val URL_PRIVACY_POLICY = "https://koko-demo-71050.web.app/herohabit/privacy-policy.html"
+    const val URL_PRIVACY_POLICY = "https://koko-demo-71050.web.app/habit-hero/privacy-policy.html"
 
     // Live terms & conditions URL
-    const val URL_TERMS_CONDITIONS = "https://koko-demo-71050.web.app/herohabit/terms-conditions.html"
+    const val URL_TERMS_CONDITIONS = "https://koko-demo-71050.web.app/habit-hero/terms-conditions.html"
+
+    // Marketing landing page, linked from Help & Support.
+    const val URL_WEBSITE = "https://koko-demo-71050.web.app/"
 
     // Real support email
     const val CONTACT_EMAIL = "matt@dyor.com"

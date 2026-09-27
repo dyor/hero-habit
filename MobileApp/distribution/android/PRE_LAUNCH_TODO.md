@@ -37,7 +37,7 @@ This checklist contains **only the remaining tasks** that require your direct ac
 - [x] **3.1 Create and Activate In-App Products:** (Done — `credit_pack_10`, `credit_pack_40`, `credit_pack_100` active)
 - [x] **3.2 Set up Real-Time Developer Notifications (RTDN):** (Done — topic linked in Adapty & Play Console)
 - [ ] **3.3 Verify App Content Forms:**
-  - **Privacy Policy URL:** Set to `https://koko-demo-71050.web.app/herohabit/privacy-policy.html`
+  - **Privacy Policy URL:** Set to `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html`
   - **Data Safety Form:** Ensure Analytics (Firebase), Crashlytics, and In-App Purchase history are declared.
 
 ---

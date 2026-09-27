@@ -13,8 +13,8 @@ This document is the **single source of truth** for publishing **Habit Hero** to
 | **iOS Bundle Identifier** | `com.dyor.habithero` | Registered in Apple Developer Portal |
 | **Monetization Model** | **Paid App ($0.99 upfront)** + Consumable Credit Refills | Includes 10 Starter Credits with download |
 | **Support Email** | `matt@dyor.com` | Declared in app and store listings |
-| **Privacy Policy URL** | `https://koko-demo-71050.web.app/herohabit/privacy-policy.html` | Subdirectory isolated from peer apps |
-| **Terms & Conditions URL** | `https://koko-demo-71050.web.app/herohabit/terms-conditions.html` | Subdirectory isolated from peer apps |
+| **Privacy Policy URL** | `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html` | Subdirectory isolated from peer apps |
+| **Terms & Conditions URL** | `https://koko-demo-71050.web.app/habit-hero/terms-conditions.html` | Subdirectory isolated from peer apps |
 | **Cloud Functions Base URL** | `https://us-central1-koko-demo-71050.cloudfunctions.net` | Secure AI proxy (OpenAI & Replicate) |
 
 ---
@@ -35,8 +35,8 @@ firebase deploy --only functions
 ```
 
 * **Verify in Browser:**
-  * Open `https://koko-demo-71050.web.app/herohabit/privacy-policy.html`
-  * Open `https://koko-demo-71050.web.app/herohabit/terms-conditions.html`
+  * Open `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html`
+  * Open `https://koko-demo-71050.web.app/habit-hero/terms-conditions.html`
 
 ---
 
@@ -102,7 +102,7 @@ firebase deploy --only functions
    * Generate a **JSON Key** and upload it to Adapty under **App Settings $\rightarrow$ Android SDK**.
 
 6. **App Content & Declarations:**
-   * **Privacy Policy URL:** `https://koko-demo-71050.web.app/herohabit/privacy-policy.html`
+   * **Privacy Policy URL:** `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html`
    * **Target Audience:** 13+ (Not designed primarily for children).
    * **Data Safety Form:**
      * *Data collected:* App info/performance (Crashlytics), Financial info (In-App Purchase history via Adapty/Google Play), Photos (processed on-device and uploaded securely to cloud proxy only when user mints a cover).
@@ -157,9 +157,9 @@ firebase deploy --only functions
      ```text
      habit,tracker,streak,routine,selfie,comic,photo,journal,superhero,discipline,daily,planner,fitness
      ```
-   * **Support URL:** `https://koko-demo-71050.web.app/herohabit/privacy-policy.html`
+   * **Support URL:** `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html`
    * **Marketing URL:** `https://koko-demo-71050.web.app`
-   * **Privacy Policy URL:** `https://koko-demo-71050.web.app/herohabit/privacy-policy.html`
+   * **Privacy Policy URL:** `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html`
 
 5. **In-App Purchases (Consumables):**
    * Go to **App Store Connect** $\rightarrow$ **Monetization** $\rightarrow$ **In-App Purchases** $\rightarrow$ Create `Consumable`:
@@ -240,7 +240,7 @@ SUBSCRIPTION_PROVIDER_IOS_API_KEY=public_live_YOUR_ACTUAL_IOS_KEY
 
 ## 🏁 7. Pre-Submission Quick Validation Checklist
 
-- [ ] `firebase deploy --only hosting` deployed the `/herohabit/` privacy policy.
+- [ ] `firebase deploy --only hosting` deployed the `/habit-hero/` privacy policy.
 - [ ] `./gradlew :androidApp:assembleDebug` builds cleanly (Verified ✅).
 - [ ] `./gradlew :androidApp:bundleRelease` generates `androidApp-release.aab`.
 - [ ] In-App Consumable products created and activated in Google Play (`credit_pack_10`, `credit_pack_40`, `credit_pack_100`).

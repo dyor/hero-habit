@@ -4,13 +4,13 @@ const CONFIG = {
     // App & Developer Branding
     APP_NAME: "Indie Playbook",
     DEVELOPER_OR_COMPANY_NAME: "Indie Playbook",
-    WEBSITE_TITLE: "Indie Playbook — Build, Launch & Grow Your Mobile Apps",
-    WEBSITE_DESCRIPTION: "Indie Playbook is the ultimate companion for indie makers and developers to turn app ideas into successful, revenue-generating mobile apps.",
+    WEBSITE_TITLE: "Indie Playbook — Top Cross-Platform Indie Apps, Origin Stories & Growth Playbooks",
+    WEBSITE_DESCRIPTION: "Discover the top independent mobile apps built with React Native, Flutter, and Kotlin Multiplatform, and learn how they were built, launched, and grown.",
     CONTACT_EMAIL: "admin@dyor.com",
 
     // Store Links (leave empty string "" if not yet published to hide badge)
-    PLAYSTORE_URL: "https://play.google.com/store/apps",
-    APPSTORE_URL: "https://apps.apple.com/app",
+    PLAYSTORE_URL: "https://play.google.com/store/apps/details?id=com.indieplaybook.app",
+    APPSTORE_URL: "",
 
     // Legal Dates (YYYY-MM-DD)
     PRIVACY_POLICY_LAST_UPDATE_DATE: "2026-07-30",
@@ -18,78 +18,78 @@ const CONFIG = {
 
     // Navigation & Social
     NAV_LINKS: [
-        { label: "Features", href: "#features" },
-        { label: "How It Works", href: "#how-it-works" },
-        { label: "FAQ", href: "#faq" },
-        { label: "Privacy Policy", href: "privacy-policy.html" },
-        { label: "Terms", href: "terms-conditions.html" }
+        { label: "Features", href: "/indie-playbook/#features" },
+        { label: "How It Works", href: "/indie-playbook/#how-it-works" },
+        { label: "FAQ", href: "/indie-playbook/#faq" },
+        { label: "Privacy Policy", href: "/privacy-policy.html" },
+        { label: "Terms", href: "/terms-conditions.html" }
     ]
 };
 
 const TEXT_CONTENT = {
     // Top Bar / Tagline Badge
-    HERO_BADGE: "🚀 Built for Indie Developers & Creators",
+    HERO_BADGE: "📱 React Native · Flutter · Kotlin Multiplatform",
 
     // Hero Section
-    HERO_TITLE: "Turn Ideas into Shipped Mobile Apps Faster",
-    HERO_SUBTITLE: "From concept and validated feature planning to multiplatform launch and growth. The complete playbook to build, launch, and monetize your apps.",
+    HERO_TITLE: "Learn how top indie cross-platform apps got built, launched, and grown",
+    HERO_SUBTITLE: "Indie Playbook is a curated directory of the most successful independent mobile apps built with cross-platform frameworks, with the origin stories and growth playbooks behind each one.",
 
     // Features Section
-    FEATURES_SECTION_TAG: "POWERFUL FEATURES",
-    FEATURES_SECTION_TITLE: "Everything you need to launch with confidence",
-    FEATURES_SECTION_SUBTITLE: "Designed from the ground up to eliminate guesswork and speed up your development workflow.",
+    FEATURES_SECTION_TAG: "WHAT'S INSIDE",
+    FEATURES_SECTION_TITLE: "A field guide to the indie app ecosystem",
+    FEATURES_SECTION_SUBTITLE: "Whether you're an indie maker, a mobile developer, or an entrepreneur, see what's actually working in production.",
 
     FEATURE_CARDS: [
         {
+            icon: "📱",
+            title: "Curated Indie Directory",
+            text: "Explore top-ranking independent apps across App Store and Google Play categories, with download estimates, ratings, publishers, and release timelines."
+        },
+        {
+            icon: "🛠️",
+            title: "Framework Insights",
+            text: "Filter by tech stack (Kotlin Multiplatform, Flutter, or React Native) to see which frameworks power real indie successes."
+        },
+        {
+            icon: "📲",
+            title: "Store Presence Tracking",
+            text: "Quickly tell Dual Store apps, published on both Google Play and the App Store, apart from App Store exclusives."
+        },
+        {
+            icon: "🌱",
+            title: "Origin Stories",
+            text: "Learn what motivated each founder to build the first version, and how they validated the idea before scaling."
+        },
+        {
+            icon: "📈",
+            title: "Growth Playbooks",
+            text: "Study the viral loops, ASO, paid acquisition, and marketing strategies that took apps to thousands of users."
+        },
+        {
             icon: "💡",
-            title: "Idea & Flow Validation",
-            text: "Brainstorm high-impact app concepts, structure intuitive user flows, and validate core features before writing code."
-        },
-        {
-            icon: "⚡",
-            title: "Rapid Multiplatform Development",
-            text: "Leverage cross-platform power across Android, iOS, Desktop, and Web with shared business logic and native performance."
-        },
-        {
-            icon: "💳",
-            title: "Turnkey Monetization",
-            text: "Seamlessly integrate in-app purchases, subscriptions, and flexible credit models built for maximum lifetime value."
-        },
-        {
-            icon: "🔒",
-            title: "Privacy & Compliance First",
-            text: "Stay fully compliant with Apple App Store and Google Play privacy policies, data deletion rules, and safety guidelines."
-        },
-        {
-            icon: "📊",
-            title: "Built-in Analytics & Growth",
-            text: "Track engagement, diagnose crashes in real time, and deploy updates with robust crash reporting and remote config."
-        },
-        {
-            icon: "🎨",
-            title: "Modern Native Design System",
-            text: "Craft polished, accessible user experiences using pre-tested components, dark mode, and fluid typography."
+            title: "Community Submissions",
+            text: "Nominate a cross-platform indie app you love, or suggest edits to help the playbook grow."
         }
     ],
 
     // How It Works / Value Props
-    WORKFLOW_SECTION_TAG: "SEAMLESS WORKFLOW",
+    WORKFLOW_SECTION_TAG: "HOW IT WORKS",
     WORKFLOW_SECTION_TITLE: "How Indie Playbook works",
     WORKFLOW_STEPS: [
         {
             step: "01",
-            title: "Plan & Structure",
-            text: "Define your product requirements, target audience, and feature roadmap with structured playbooks."
+            title: "Discover",
+            text: "Browse a ranked, data-driven directory of indie apps built on App Store ranking and download data from AppFigures."
         },
         {
             step: "02",
-            title: "Build & Iterate",
-            text: "Develop features quickly with clean architecture, offline-ready local storage, and real-time testing."
+            title: "Filter",
+            text: "Narrow it down by framework, store presence, or story type to find the apps most relevant to what you're building."
         },
         {
             step: "03",
-            title: "Publish & Scale",
-            text: "Deploy to Google Play and the Apple App Store with full store compliance, automated builds, and marketing landing pages."
+            title: "Learn",
+            text: "Read each app's origin story and growth playbook, then follow links to its website and store pages."
         }
     ],
 
@@ -98,25 +98,29 @@ const TEXT_CONTENT = {
     FAQ_SECTION_TITLE: "Got questions? We've got answers",
     FAQS: [
         {
-            q: "Which platforms are supported?",
-            a: "Indie Playbook is built for Android and iOS devices, with desktop and web companions supported out of the box."
+            q: "Is Indie Playbook free?",
+            a: "Yes. Indie Playbook is free to download and use, with no ads and no subscriptions."
         },
         {
-            q: "How does Indie Playbook protect user privacy?",
-            a: "We prioritize privacy: all personal data is transmitted securely over HTTPS/TLS, minimal telemetry is collected for crash diagnostics, and users can request account and data deletion at any time directly in the app."
+            q: "Where does the data come from?",
+            a: "Rankings, ratings, and download estimates are based on App Store and Google Play ranking data from AppFigures. Origin stories and growth playbooks are researched and curated, and the community can suggest edits."
         },
         {
-            q: "How do I request account and data deletion?",
-            a: "You can delete your account and associated data directly within the app under Profile/Settings > Delete Account, or by contacting our support team at our contact email."
+            q: "Do I need an account?",
+            a: "No. You can browse as a guest. Signing in with an email address is optional and lets you submit apps and suggest edits."
         },
         {
-            q: "Can I use the app for free?",
-            a: "Yes! Core features are accessible for free. Optional premium upgrades and subscriptions unlock advanced tools and unlimited access."
+            q: "How does Indie Playbook protect my privacy?",
+            a: "We collect only what's needed to run the app: your email if you sign in, and crash diagnostics. We don't sell or share your data with third parties, and everything is sent over HTTPS. See our <a href="/privacy-policy.html">Privacy Policy</a> for details."
+        },
+        {
+            q: "How do I delete my account and data?",
+            a: "Delete your account directly in the app from your Profile / Settings, or email admin@dyor.com and we'll take care of it."
         }
     ],
 
     // CTA Banner Section
     CTA_SECTION_TAG: "GET STARTED TODAY",
-    CTA_SECTION_TITLE: "Ready to ship your next app?",
-    CTA_SECTION_TEXT: "Join developers building sustainable, revenue-generating mobile apps. Download Indie Playbook today."
+    CTA_SECTION_TITLE: "Start exploring the indie app ecosystem",
+    CTA_SECTION_TEXT: "Download Indie Playbook and see how today's top cross-platform indie apps were built, launched, and grown."
 };

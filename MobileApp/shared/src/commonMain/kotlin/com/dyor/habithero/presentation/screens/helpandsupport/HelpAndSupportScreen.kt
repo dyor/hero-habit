@@ -18,6 +18,7 @@ import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.generated.resources.Res
 import com.dyor.habithero.generated.resources.help_and_support
 import com.dyor.habithero.generated.resources.item_contact_support
+import com.dyor.habithero.generated.resources.item_website
 import com.dyor.habithero.root.AppConfiguration
 import com.dyor.habithero.util.AppUtil
 import org.jetbrains.compose.resources.stringResource
@@ -30,6 +31,7 @@ fun HelpAndSupportScreen(
 ) {
     val itemList = listOf(
         SettingsItemUiState(textRes = Res.string.item_contact_support),
+        SettingsItemUiState(textRes = Res.string.item_website),
         SettingsItemUiState(textRes = UiRes.string.privacy_policy),
         SettingsItemUiState(textRes = UiRes.string.terms_conditions),
     )
@@ -50,6 +52,10 @@ fun HelpAndSupportScreen(
                 when (it.textRes) {
                     Res.string.item_contact_support -> {
                         appUtil.openFeedbackMail()
+                    }
+
+                    Res.string.item_website -> {
+                        localUriHandler.openUri(AppConfiguration.URL_WEBSITE)
                     }
 
                     UiRes.string.privacy_policy -> {

@@ -31,8 +31,8 @@ Because Firebase Hosting deployments are atomic (deploying one project wipes out
 ### B. Live URL Mapping
 * **Habit Hero:**
   * 🏠 Main Landing Page: `https://koko-demo-71050.web.app/`
-  * 📄 Privacy Policy: `https://koko-demo-71050.web.app/herohabit/privacy-policy.html`
-  * ⚖️ Terms & Conditions: `https://koko-demo-71050.web.app/herohabit/terms-conditions.html`
+  * 📄 Privacy Policy: `https://koko-demo-71050.web.app/habit-hero/privacy-policy.html`
+  * ⚖️ Terms & Conditions: `https://koko-demo-71050.web.app/habit-hero/terms-conditions.html`
 * **Indie Playbook:**
   * 📄 Privacy Policy: `https://koko-demo-71050.web.app/privacy-policy.html` (loads `config-indie.js`)
   * ⚖️ Terms & Conditions: `https://koko-demo-71050.web.app/terms-conditions.html` (loads `config-indie.js`)
