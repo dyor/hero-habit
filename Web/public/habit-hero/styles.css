@@ -1370,3 +1370,58 @@ footer {
         padding: 2.5rem 1.25rem;
     }
 }
+
+/* Store download badges (shown as "Coming soon" until the listings are public) */
+.store-download {
+    margin-top: 2rem;
+}
+
+.store-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.cta-banner .store-badges {
+    justify-content: center;
+}
+
+.store-badge {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+}
+
+.store-badge img {
+    height: 52px;
+    width: auto;
+    display: block;
+}
+
+.store-badge.coming-soon img {
+    filter: grayscale(1);
+    opacity: 0.55;
+}
+
+.coming-soon-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+}
+
+.store-note {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 1024px) {
+    .hero-content .store-badges {
+        justify-content: center;
+    }
+}

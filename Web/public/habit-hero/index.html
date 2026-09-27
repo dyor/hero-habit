@@ -9,11 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=4">
 
-    <!-- Firebase App & Firestore SDKs for real-time lead capture -->
-    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -32,7 +29,7 @@
                 <a href="#why-habithero">Why It Works</a>
             </nav>
             <div class="nav-cta">
-                <a href="#waitlist" class="nav-button">Join Waitlist ⚡</a>
+                <a href="#download" class="nav-button">Get the App ⚡</a>
             </div>
         </div>
     </header>
@@ -47,105 +44,20 @@
                     Build lasting discipline with a habit tracker that rewards your milestones with custom AI-generated vintage comic book covers starring <strong>YOU</strong>. Snap a victory selfie, celebrate streaks, and share your hero covers with friends.
                 </p>
 
-                <!-- Store Links (Commented out per user request until public launch)
-                <div class="cta-buttons" id="download" style="display: none;">
-                    <a href="" class="app-store-link" target="_blank" style="display: none;"> 
-                        <img src="images/download_appstore.svg" alt="Download on App Store" class="download-button">
-                    </a>
-                    <a href="" class="play-store-link" target="_blank" style="display: none;"> 
-                        <img src="images/download_playstore.png" alt="Get it on Google Play" class="download-button">
-                    </a>
-                </div>
-                -->
-
-                <!-- Interactive Hero Waitlist Form & Pricing Survey -->
-                <div class="waitlist-card" id="waitlist">
-                    <div class="waitlist-header">
-                        <span class="waitlist-pill">🚀 VIP EARLY ACCESS</span>
-                        <h3>Join The Founding Hero Waitlist</h3>
-                        <p>Be the first to mint custom comic covers when we launch on your platform.</p>
-                    </div>
-
-                    <!-- Step 1: Email & Platform Choice -->
-                    <form id="hero-waitlist-form" class="waitlist-form" onsubmit="handleWaitlistSubmit(event, 'hero')">
-                        <div class="platform-selector">
-                            <label class="platform-option">
-                                <input type="radio" name="hero-platform" value="iOS" checked>
-                                <span class="platform-btn">🍏 iOS / iPhone</span>
-                            </label>
-                            <label class="platform-option">
-                                <input type="radio" name="hero-platform" value="Android">
-                                <span class="platform-btn">🤖 Android</span>
-                            </label>
+                <!-- Store badges: "Coming soon" until the listings are public. At launch, swap each
+                     <div class="store-badge coming-soon"> for <a class="store-badge" href="…store URL…">. -->
+                <div class="store-download" id="download">
+                    <div class="store-badges">
+                        <div class="store-badge coming-soon" aria-label="Google Play, coming soon">
+                            <img src="images/download_playstore.png" alt="Get it on Google Play">
+                            <span class="coming-soon-label">Coming soon</span>
                         </div>
-                        <div class="input-group">
-                            <input type="email" id="hero-waitlist-email" placeholder="Enter your email address..." required autocomplete="email">
-                            <button type="submit" class="waitlist-submit-btn" id="hero-waitlist-btn">Join Waitlist ⚡</button>
+                        <div class="store-badge coming-soon" aria-label="App Store, coming soon">
+                            <img src="images/download_appstore.svg" alt="Download on the App Store">
+                            <span class="coming-soon-label">Coming soon</span>
                         </div>
-                    </form>
-
-                    <!-- Step 2: Pricing Survey (5c, 10c recommended, 15c, 20c, 25c, 50c per cover) -->
-                    <div id="hero-pricing-survey" class="pricing-survey-box" style="display: none;">
-                        <div class="survey-badge">🎉 YOU'RE ON THE WAITLIST!</div>
-                        <h4>Quick question for founding heroes:</h4>
-                        <p class="survey-question">How much would you be willing to pay for a <strong>10-pack</strong> of personalized AI comic book covers?</p>
-                        
-                        <form id="hero-survey-form" onsubmit="handleSurveySubmit(event, 'hero')">
-                            <div class="pricing-options">
-                                <label class="price-chip">
-                                    <input type="radio" name="hero-price" value="5¢/cover ($0.50 for 10)">
-                                    <span class="chip-content">
-                                        <span class="chip-price">5¢ <small>/ cover</small></span>
-                                        <span class="chip-total">$0.50 for 10</span>
-                                    </span>
-                                </label>
-                                <label class="price-chip popular">
-                                    <input type="radio" name="hero-price" value="10¢/cover ($1.00 for 10)" checked>
-                                    <span class="chip-content">
-                                        <span class="chip-price">10¢ <small>/ cover</small></span>
-                                        <span class="chip-total">$1.00 for 10</span>
-                                        <span class="badge-pop">RECOMMENDED</span>
-                                    </span>
-                                </label>
-                                <label class="price-chip">
-                                    <input type="radio" name="hero-price" value="15¢/cover ($1.50 for 10)">
-                                    <span class="chip-content">
-                                        <span class="chip-price">15¢ <small>/ cover</small></span>
-                                        <span class="chip-total">$1.50 for 10</span>
-                                    </span>
-                                </label>
-                                <label class="price-chip">
-                                    <input type="radio" name="hero-price" value="20¢/cover ($2.00 for 10)">
-                                    <span class="chip-content">
-                                        <span class="chip-price">20¢ <small>/ cover</small></span>
-                                        <span class="chip-total">$2.00 for 10</span>
-                                    </span>
-                                </label>
-                                <label class="price-chip">
-                                    <input type="radio" name="hero-price" value="25¢/cover ($2.50 for 10)">
-                                    <span class="chip-content">
-                                        <span class="chip-price">25¢ <small>/ cover</small></span>
-                                        <span class="chip-total">$2.50 for 10</span>
-                                    </span>
-                                </label>
-                                <label class="price-chip">
-                                    <input type="radio" name="hero-price" value="50¢/cover ($5.00 for 10)">
-                                    <span class="chip-content">
-                                        <span class="chip-price">50¢ <small>/ cover</small></span>
-                                        <span class="chip-total">$5.00 for 10</span>
-                                    </span>
-                                </label>
-                            </div>
-                            <button type="submit" class="survey-submit-btn" id="hero-survey-btn">Submit Feedback 🚀</button>
-                        </form>
                     </div>
-
-                    <!-- Step 3: Success Confirmation -->
-                    <div id="hero-survey-success" class="survey-success-box" style="display: none;">
-                        <div class="success-icon">🏆</div>
-                        <h4>You're All Set, Hero!</h4>
-                        <p>Your spot is reserved and your feedback is saved in Firebase. We’ll let you know the moment Habit Hero is available on your platform. Every download includes <strong>10 starter comic covers</strong>!</p>
-                    </div>
+                    <p class="store-note">Launching soon on Google Play and the App Store. Every download includes 10 starter comic covers.</p>
                 </div>
 
                 <div class="hero-stats">
@@ -171,7 +83,7 @@
                 <div class="comic-card-wrapper">
                     <div class="comic-speech-tag">14 DAY STREAK HERO!</div>
                     <div class="device-frame">
-                        <img src="images/hero.jpg?v=3" alt="Habit Hero Morning Jog Comic Cover Starring User Selfie" class="hero-cover-img">
+                        <img src="images/hero.jpg?v=4" alt="Habit Hero Morning Jog Comic Cover Starring User Selfie" class="hero-cover-img">
                         <div class="device-overlay">
                             <div class="overlay-badge">MORNING JOG DAILY</div>
                             <div class="overlay-streak">🔥 14 Day Streak</div>
@@ -228,7 +140,7 @@
         <div class="showcase-grid">
             <div class="showcase-card">
                 <div class="showcase-image-box">
-                    <img src="images/screen_quests.png?v=3" alt="Daily Quests Screen">
+                    <img src="images/screen_quests.png?v=4" alt="Daily Quests Screen">
                 </div>
                 <div class="showcase-info">
                     <h4>Daily Quest Dashboard</h4>
@@ -238,7 +150,7 @@
 
             <div class="showcase-card">
                 <div class="showcase-image-box">
-                    <img src="images/screen_celebration.png?v=3" alt="Victory Selfie & Minting Screen">
+                    <img src="images/screen_celebration.png?v=4" alt="Victory Selfie & Minting Screen">
                 </div>
                 <div class="showcase-info">
                     <h4>Victory Selfie & Minting</h4>
@@ -248,7 +160,7 @@
 
             <div class="showcase-card">
                 <div class="showcase-image-box">
-                    <img src="images/screen_hall_of_heroes.png?v=3" alt="Hall of Heroes Gallery Screen">
+                    <img src="images/screen_hall_of_heroes.png?v=4" alt="Hall of Heroes Gallery Screen">
                 </div>
                 <div class="showcase-info">
                     <h4>Hall of Heroes Gallery</h4>
@@ -258,7 +170,7 @@
 
             <div class="showcase-card">
                 <div class="showcase-image-box">
-                    <img src="images/screen_custom_scenario.png?v=3" alt="Custom Action Scenarios Screen">
+                    <img src="images/screen_custom_scenario.png?v=4" alt="Custom Action Scenarios Screen">
                 </div>
                 <div class="showcase-info">
                     <h4>Custom Story Prompts</h4>
@@ -369,7 +281,7 @@
                     <span class="covers-count">⚡ 10 Comic Cover Credits</span>
                     <span class="covers-sub">$0.20 per cover</span>
                 </div>
-                <a href="#waitlist" class="plan-cta-btn">Get Habit Hero ⚡</a>
+                <a href="#download" class="plan-cta-btn">Get Habit Hero ⚡</a>
             </div>
 
             <!-- Pack 2: 40 credits (Featured) -->
@@ -389,7 +301,7 @@
                     <span class="covers-count">⚡ 40 Comic Cover Credits</span>
                     <span class="covers-sub">$0.15 per cover</span>
                 </div>
-                <a href="#waitlist" class="plan-cta-btn featured-btn">Get Habit Hero 🚀</a>
+                <a href="#download" class="plan-cta-btn featured-btn">Get Habit Hero 🚀</a>
             </div>
 
             <!-- Pack 3: 100 credits (Best Value) -->
@@ -409,7 +321,7 @@
                     <span class="covers-count">⚡ 100 Comic Cover Credits</span>
                     <span class="covers-sub">$0.13 per cover</span>
                 </div>
-                <a href="#waitlist" class="plan-cta-btn best-value-btn">Get Habit Hero 🏆</a>
+                <a href="#download" class="plan-cta-btn best-value-btn">Get Habit Hero 🏆</a>
             </div>
         </div>
 
@@ -420,90 +332,27 @@
         </div>
     </section>
 
-    <!-- Call to Action Banner / Bottom Waitlist -->
+    <!-- Call to Action Banner / Bottom Download -->
     <section class="cta-banner">
         <div class="cta-container">
             <div class="cta-badge">💥 UNLEASH YOUR INNER SUPERHERO</div>
             <h2>Become the Hero of Your Daily Routine</h2>
-            <p>Join our priority waitlist today and start turning daily consistency into legendary superhero stories.</p>
-            
-            <div class="waitlist-card bottom-waitlist">
-                <form id="cta-waitlist-form" class="waitlist-form" onsubmit="handleWaitlistSubmit(event, 'cta')">
-                    <div class="platform-selector">
-                        <label class="platform-option">
-                            <input type="radio" name="cta-platform" value="iOS" checked>
-                            <span class="platform-btn">🍏 iOS / iPhone</span>
-                        </label>
-                        <label class="platform-option">
-                            <input type="radio" name="cta-platform" value="Android">
-                            <span class="platform-btn">🤖 Android</span>
-                        </label>
-                    </div>
-                    <div class="input-group">
-                        <input type="email" id="cta-waitlist-email" placeholder="Enter your email address..." required autocomplete="email">
-                        <button type="submit" class="waitlist-submit-btn" id="cta-waitlist-btn">Join Priority Waitlist ⚡</button>
-                    </div>
-                </form>
+            <p>Start turning daily consistency into legendary superhero stories.</p>
 
-                <div id="cta-pricing-survey" class="pricing-survey-box" style="display: none;">
-                    <div class="survey-badge">🎉 YOU'RE ON THE WAITLIST!</div>
-                    <h4>Quick question for founding heroes:</h4>
-                    <p class="survey-question">How much would you pay for a <strong>10-pack</strong> of personalized AI comic covers?</p>
-                    <form id="cta-survey-form" onsubmit="handleSurveySubmit(event, 'cta')">
-                        <div class="pricing-options">
-                            <label class="price-chip">
-                                <input type="radio" name="cta-price" value="5¢/cover ($0.50 for 10)">
-                                <span class="chip-content">
-                                    <span class="chip-price">5¢ <small>/ cover</small></span>
-                                    <span class="chip-total">$0.50 for 10</span>
-                                </span>
-                            </label>
-                            <label class="price-chip popular">
-                                <input type="radio" name="cta-price" value="10¢/cover ($1.00 for 10)" checked>
-                                <span class="chip-content">
-                                    <span class="chip-price">10¢ <small>/ cover</small></span>
-                                    <span class="chip-total">$1.00 for 10</span>
-                                    <span class="badge-pop">RECOMMENDED</span>
-                                </span>
-                            </label>
-                            <label class="price-chip">
-                                <input type="radio" name="cta-price" value="15¢/cover ($1.50 for 10)">
-                                <span class="chip-content">
-                                    <span class="chip-price">15¢ <small>/ cover</small></span>
-                                    <span class="chip-total">$1.50 for 10</span>
-                                </span>
-                            </label>
-                            <label class="price-chip">
-                                <input type="radio" name="cta-price" value="20¢/cover ($2.00 for 10)">
-                                <span class="chip-content">
-                                    <span class="chip-price">20¢ <small>/ cover</small></span>
-                                    <span class="chip-total">$2.00 for 10</span>
-                                </span>
-                            </label>
-                            <label class="price-chip">
-                                <input type="radio" name="cta-price" value="25¢/cover ($2.50 for 10)">
-                                <span class="chip-content">
-                                    <span class="chip-price">25¢ <small>/ cover</small></span>
-                                    <span class="chip-total">$2.50 for 10</span>
-                                </span>
-                            </label>
-                            <label class="price-chip">
-                                <input type="radio" name="cta-price" value="50¢/cover ($5.00 for 10)">
-                                <span class="chip-content">
-                                    <span class="chip-price">50¢ <small>/ cover</small></span>
-                                    <span class="chip-total">$5.00 for 10</span>
-                                </span>
-                            </label>
-                        </div>
-                        <button type="submit" class="survey-submit-btn" id="cta-survey-btn">Submit Feedback 🚀</button>
-                    </form>
+            <!-- Store badges: "Coming soon" until the listings are public. At launch, swap each
+                 <div class="store-badge coming-soon"> for <a class="store-badge" href="…store URL…">. -->
+            <div class="store-download">
+                <div class="store-badges">
+                    <div class="store-badge coming-soon" aria-label="Google Play, coming soon">
+                        <img src="images/download_playstore.png" alt="Get it on Google Play">
+                        <span class="coming-soon-label">Coming soon</span>
+                    </div>
+                    <div class="store-badge coming-soon" aria-label="App Store, coming soon">
+                        <img src="images/download_appstore.svg" alt="Download on the App Store">
+                        <span class="coming-soon-label">Coming soon</span>
+                    </div>
                 </div>
-
-                <div id="cta-survey-success" class="survey-success-box" style="display: none;">
-                    <div class="success-icon">🏆</div>
-                    <h4>You're All Set, Hero!</h4>
-                    <p>Your spot is reserved. We'll send your invite as soon as early access opens!</p>
-                </div>
+                <p class="store-note">Launching soon on Google Play and the App Store. Every download includes 10 starter comic covers.</p>
             </div>
         </div>
     </section>
@@ -530,129 +379,6 @@
             <p>&copy; <span class="current-year">2026</span> <span class="app-name">Habit Hero</span>. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- Firebase & Waitlist Submission Handler -->
-    <script>
-        // Initialize Firebase
-        const firebaseConfig = {
-            projectId: "koko-demo-71050",
-            appId: "1:560525802103:web:bb585e7ad94bbb30b56472",
-            storageBucket: "koko-demo-71050.firebasestorage.app",
-            apiKey: "AIzaSyB9cVbHoDr-RwoBc74LKbBu9NwSXJ6x9NM",
-            authDomain: "koko-demo-71050.firebaseapp.com",
-            messagingSenderId: "560525802103",
-            measurementId: "G-N3XS4M2MNK"
-        };
-
-        let db = null;
-        try {
-            if (typeof firebase !== 'undefined') {
-                firebase.initializeApp(firebaseConfig);
-                db = firebase.firestore();
-            }
-        } catch (e) {
-            console.warn("Firebase initialization notice:", e);
-        }
-
-        let currentDocId = null;
-        let waitlistData = { email: '', platform: 'iOS', priceFeedback: '' };
-
-        function handleWaitlistSubmit(e, prefix) {
-            e.preventDefault();
-            const emailInput = document.getElementById(prefix + '-waitlist-email');
-            const platformRadio = document.querySelector('input[name="' + prefix + '-platform"]:checked');
-            const btn = document.getElementById(prefix + '-waitlist-btn');
-            
-            if (!emailInput || !emailInput.value) return;
-            
-            waitlistData.email = emailInput.value.trim().toLowerCase();
-            waitlistData.platform = platformRadio ? platformRadio.value : 'iOS';
-            waitlistData.timestamp = new Date().toISOString();
-            
-            // Create a deterministic safe document ID based on email + timestamp
-            currentDocId = waitlistData.email.replace(/[^a-z0-9]/g, '_') + '_' + Date.now();
-
-            if (btn) {
-                btn.disabled = true;
-                btn.textContent = "Saving...";
-            }
-
-            // Save to Firebase Firestore
-            if (db) {
-                db.collection('waitlist').doc(currentDocId).set({
-                    email: waitlistData.email,
-                    platform: waitlistData.platform,
-                    source: prefix,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    clientTimestamp: waitlistData.timestamp,
-                    userAgent: navigator.userAgent
-                }).then(() => {
-                    console.log("✅ Successfully saved waitlist lead to Cloud Firestore:", currentDocId);
-                }).catch(err => {
-                    console.warn("Firestore write error (will keep in localStorage):", err);
-                });
-            }
-
-            // Save to LocalStorage Backup
-            try {
-                const existing = JSON.parse(localStorage.getItem('habithero_waitlist') || '[]');
-                existing.push({ ...waitlistData, docId: currentDocId });
-                localStorage.setItem('habithero_waitlist', JSON.stringify(existing));
-            } catch (err) {
-                console.warn('LocalStorage save error', err);
-            }
-
-            // Transition UI: Hide email form and show Pricing Survey
-            const form = document.getElementById(prefix + '-waitlist-form');
-            const survey = document.getElementById(prefix + '-pricing-survey');
-            if (form) form.style.display = 'none';
-            if (survey) survey.style.display = 'block';
-        }
-
-        function handleSurveySubmit(e, prefix) {
-            e.preventDefault();
-            const priceRadio = document.querySelector('input[name="' + prefix + '-price"]:checked');
-            const selectedPrice = priceRadio ? priceRadio.value : '10¢/cover ($1.00 for 10)';
-            const btn = document.getElementById(prefix + '-survey-btn');
-
-            waitlistData.priceFeedback = selectedPrice;
-            waitlistData.surveyTimestamp = new Date().toISOString();
-
-            if (btn) {
-                btn.disabled = true;
-                btn.textContent = "Saving...";
-            }
-
-            // Update in Firebase Firestore
-            if (db && currentDocId) {
-                db.collection('waitlist').doc(currentDocId).update({
-                    priceFeedback: selectedPrice,
-                    surveyAnsweredAt: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    console.log("✅ Successfully updated survey response in Cloud Firestore:", currentDocId);
-                }).catch(err => {
-                    console.warn("Firestore update error:", err);
-                });
-            }
-
-            // Update in LocalStorage
-            try {
-                const existing = JSON.parse(localStorage.getItem('habithero_waitlist') || '[]');
-                if (existing.length > 0) {
-                    existing[existing.length - 1].priceFeedback = selectedPrice;
-                    localStorage.setItem('habithero_waitlist', JSON.stringify(existing));
-                }
-            } catch (err) {
-                console.warn('LocalStorage survey update error', err);
-            }
-
-            // Transition UI: Hide survey and show Confirmation
-            const survey = document.getElementById(prefix + '-pricing-survey');
-            const success = document.getElementById(prefix + '-survey-success');
-            if (survey) survey.style.display = 'none';
-            if (success) success.style.display = 'block';
-        }
-    </script>
 
     <script src="updateContent.js"></script>
 

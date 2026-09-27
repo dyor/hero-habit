@@ -7,8 +7,8 @@ const CONFIG = {
     CONTACT_EMAIL: "matt@dyor.com",
     PRIVACY_POLICY_LAST_UPDATE_DATE: "2026-08-13",
     TERMS_AND_SERVICE_LAST_UPDATE_DATE: "2026-08-13",
-    PLAYSTORE_URL: "https://play.google.com/store/apps/details?id=com.dyor.habithero",
-    APPSTORE_URL: "https://apps.apple.com/app/habithero/id1234567890",
+    PLAYSTORE_URL: "https://play.google.com/store/apps/details?id=com.dyor.habitheroapp",
+    APPSTORE_URL: "", // set once the App Store listing exists
 };
 
 const TEXT_CONTENT = {
