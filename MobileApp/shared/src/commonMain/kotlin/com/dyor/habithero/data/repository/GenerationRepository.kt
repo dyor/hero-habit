@@ -6,6 +6,7 @@ import com.dyor.habithero.data.source.local.entity.toEntity
 import com.dyor.habithero.data.source.local.entity.toModel
 import com.dyor.habithero.data.source.remote.apiservices.TemporaryFileUploadApiService
 import com.dyor.habithero.domain.exceptions.CreditRequiredException
+import com.dyor.habithero.domain.exceptions.FileUploadException
 import com.dyor.habithero.domain.exceptions.PurchaseRequiredException
 import com.dyor.habithero.domain.model.credit.CreditConstants
 import com.dyor.habithero.domain.model.credit.CreditTransaction
@@ -17,14 +18,13 @@ import com.dyor.habithero.util.analytics.Analytics
 import com.dyor.habithero.util.file.FileManager
 import com.dyor.habithero.util.file.mimeTypeForFileName
 import com.dyor.habithero.util.logging.AppLogger
-import io.ktor.util.encodeBase64
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlin.coroutines.cancellation.CancellationException
 
 /**
- * Orchestrates one AI generation: spend a credit, upload input files to the cloud, call the
+ * Orchestrates one AI generation: upload input files to the cloud, spend a credit, call the
  * [AiGenerationService], then cache + persist the [GenerationOutput] locally (Room) so the
  * gallery can observe it. Network work runs through [BackgroundExecutor]. The AI backend is
  * abstracted by [AiGenerationProvider] (Replicate / OpenAI).
@@ -48,11 +48,14 @@ class GenerationRepository(
         }
 
     suspend fun generate(input: GenerationInput): Result<GenerationOutput> = backgroundExecutor.execute {
+        // Upload first: if the selfie never reaches the cloud the provider would draw a generic
+        // cover from the prompt alone, so fail with FileUploadException before any credit is spent.
+        val updatedGenerationInput = input.uploadFilesIntoCloud()
+
         if (AppConfiguration.PREMIUM_FEATURES_ENABLED) {
             creditRepository.useCredits(CreditConstants.COST_GENERATION)
         }
         analytics.logEvent(event = Analytics.EVENT_CLICKED_GENERATE)
-        val updatedGenerationInput = input.uploadFilesIntoCloud()
 
         val aiGenerationOutputResult =
             aiGenerationProvider.generate(input = updatedGenerationInput)
@@ -112,14 +115,12 @@ class GenerationRepository(
                     AppLogger.e("File upload failed: ${e.message}")
                     null
                 }
-                AppLogger.d("File uploaded. Url: $uploadedUrl")
-                if (!uploadedUrl.isNullOrBlank() && (uploadedUrl.startsWith("http://") || uploadedUrl.startsWith("https://"))) {
-                    uploadedUrl
-                } else {
-                    // Data URI fallback: 100% valid URI supported natively by Replicate
-                    val base64 = fileBytes.encodeBase64()
-                    "data:$mimeType;base64,$base64"
+                if (fileBytes.isEmpty() || uploadedUrl.isNullOrBlank() || !(uploadedUrl.startsWith("http://") || uploadedUrl.startsWith("https://"))) {
+                    AppLogger.e("File upload produced no usable URL for $fileNameWithExtension (bytes=${fileBytes.size}, url=$uploadedUrl)")
+                    throw FileUploadException()
                 }
+                AppLogger.d("File uploaded. Url: $uploadedUrl")
+                uploadedUrl
             }
         },
     )
