@@ -1,1 +1,2 @@
-• Report AI content: flag any generated comic cover as offensive or inappropriate right in the app (celebration screen, Hall of Heroes, and habit cover viewer)
+• feat(moderation): in-app reporting for AI-generated comic covers
+• fix(generation): don't spend a credit when the selfie fails to upload

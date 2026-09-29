@@ -1,0 +1,5 @@
+• chore(release): bump to 1.0.5 (9)
+• Move Habit Hero landing to /habit-hero/, add app picker at site root
+• Move legal pages to /habit-hero/, add in-app Website link, sync Indie Playbook web
+• fix(assets): correct "1 DAY STREEK!" to "7 DAY STREAK!" on cover fixtures
+• chore(store): refresh celebration listing image with the legible subtitle
