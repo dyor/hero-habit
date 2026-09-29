@@ -13,6 +13,10 @@ interface Analytics {
         const val PARAM_NB_PAYWALL_DISMISSED = "nb_paywall_dismissed"
         const val EVENT_CLICKED_GENERATE = "clicked_generate"
         const val EVENT_CLICKED_REPORT_AI_CONTENT = "clicked_report_ai_content"
+        const val EVENT_REPORTED_AI_CONTENT = "reported_ai_content"
+        const val PARAM_CONTENT_ID = "content_id"
+        const val PARAM_HERO_ROLE = "hero_role"
+        const val PARAM_REPORT_REASON = "report_reason"
     }
 }
 

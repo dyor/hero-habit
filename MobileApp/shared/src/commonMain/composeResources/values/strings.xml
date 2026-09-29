@@ -69,9 +69,14 @@
     <string name="empty_generations_state_title">Let’s create something amazing</string>
     <string name="empty_generations_state_description">Your creations will appear here once you start generating.</string>
 
-    <string name="ai_content_report_dialog_title">Report Content</string>
-    <string name="ai_content_report_dialog_message">Why are you reporting this content?</string>
-    <string name="ai_content_report_dialog_input_label">Offensive, inaccurate, etc.</string>
+    <string name="ai_content_report_dialog_title">Report AI Content</string>
+    <string name="ai_content_report_dialog_message">Is this AI-generated cover offensive or inappropriate? Tell us why.</string>
+    <string name="ai_content_report_dialog_input_label">Add details (optional)</string>
+    <string name="ai_content_report_reason_offensive">Offensive or hateful</string>
+    <string name="ai_content_report_reason_sexual">Sexual or inappropriate</string>
+    <string name="ai_content_report_reason_violent">Violent or disturbing</string>
+    <string name="ai_content_report_reason_other">Something else</string>
+    <string name="ai_content_report_btn_open_long">⚑ Report this AI cover</string>
     <string name="ai_content_report_btn_dialog_confirm">Submit</string>
     <string name="ai_content_report_btn_dialog_dismiss">Cancel</string>
     <string name="ai_content_report_submitted_msg">Thanks! Your report has been submitted.</string>

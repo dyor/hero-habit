@@ -44,12 +44,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import com.dyor.habithero.data.repository.ContentReportRepository
 import com.dyor.habithero.designsystem.components.AppButton
 import com.dyor.habithero.designsystem.components.ConfettiParticlesAnimated
 import com.dyor.habithero.designsystem.components.ScreenWithToolbar
 import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.domain.model.ComicCover
 import com.dyor.habithero.presentation.components.ComicCoverImage
+import com.dyor.habithero.presentation.components.ReportComicCoverHost
+import com.dyor.habithero.presentation.components.ReportComicCoverLink
 import com.dyor.habithero.root.AppConfiguration
 import com.dyor.habithero.util.StoreScreenshot
 import com.dyor.habithero.util.file.FileManager
@@ -72,6 +75,7 @@ fun CelebrationScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val fileManager: FileManager = koinInject()
+    val contentReportRepository: ContentReportRepository = koinInject()
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(habitId, habitTitle, streakCount) {
@@ -91,6 +95,7 @@ fun CelebrationScreen(
                 fileManager.shareFile(url)
             }
         },
+        onReportCover = contentReportRepository::reportComicCover,
     )
 }
 
@@ -104,6 +109,7 @@ fun CelebrationScreen(
     onNavigateBack: () -> Unit,
     onNavigateToPaywall: () -> Unit = {},
     onShareCover: (String) -> Unit = {},
+    onReportCover: (ComicCover, String) -> Unit = { _, _ -> },
 ) {
     val coroutineScope = rememberCoroutineScope()
     var hasAutoLaunchedCamera by remember { mutableStateOf(false) }
@@ -227,6 +233,7 @@ fun CelebrationScreen(
                         onViewGallery = onNavigateToGallery,
                         onBack = onNavigateBack,
                         onShareCover = onShareCover,
+                        onReportCover = onReportCover,
                     )
                 } else if (uiState.isMilestoneCelebration) {
                     // Milestone AI Comic Cover Minting Flow
@@ -425,6 +432,7 @@ private fun ComicRevealCard(
     onViewGallery: () -> Unit,
     onBack: () -> Unit,
     onShareCover: (String) -> Unit = {},
+    onReportCover: (ComicCover, String) -> Unit = { _, _ -> },
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -497,6 +505,16 @@ private fun ComicRevealCard(
                     shape = RoundedCornerShape(12.dp),
                 ) {
                     Text("Back to Quests ➔", color = Color(0xFFA5B4FC))
+                }
+
+                if (cover.imageUrl.isNotBlank()) {
+                    ReportComicCoverHost(onSubmitReport = onReportCover) { requestReport ->
+                        ReportComicCoverLink(
+                            modifier = Modifier.align(Alignment.CenterHorizontally),
+                            color = MaterialTheme.colorScheme.error,
+                            onClick = { requestReport(cover) },
+                        )
+                    }
                 }
             }
         }

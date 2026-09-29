@@ -443,7 +443,6 @@ private fun ProfileInfoBox(user: User?, onClick: () -> Unit) {
     }
 }
 
-
 @Preview
 @Composable
 private fun AccountScreenPreview() {

@@ -56,6 +56,7 @@ import com.dyor.habithero.designsystem.theme.AppTheme
 import com.dyor.habithero.domain.model.ComicCover
 import com.dyor.habithero.domain.model.HeroRole
 import com.dyor.habithero.presentation.components.ComicCoverImage
+import com.dyor.habithero.presentation.components.ReportComicCoverButton
 import com.dyor.habithero.util.StoreScreenshot
 import com.dyor.habithero.util.extensions.asFormattedDate
 import com.dyor.habithero.util.file.FileManager
@@ -345,6 +346,7 @@ private fun FullScreenComicViewer(
                                 color = Color.White.copy(alpha = 0.7f),
                                 fontSize = 12.sp,
                             )
+                            ReportComicCoverButton(cover = cover)
                         }
                     }
                 }

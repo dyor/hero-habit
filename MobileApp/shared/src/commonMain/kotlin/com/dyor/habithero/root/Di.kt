@@ -2,6 +2,7 @@ package com.dyor.habithero.root
 
 import com.dyor.habithero.common.BuildConfig
 import com.dyor.habithero.data.BackgroundExecutor
+import com.dyor.habithero.data.repository.ContentReportRepository
 import com.dyor.habithero.data.repository.CreditRepository
 import com.dyor.habithero.data.repository.GenerationRepository
 import com.dyor.habithero.data.repository.HabitRepository
@@ -123,6 +124,7 @@ private val dataModule = module {
     single { SubscriptionRepository(get(), get(), get(), get()) }
     single { GenerationRepository(get(), get(), get(), get(), get(), get(), get()) }
     single { HabitRepository(get(), get(), get()) }
+    singleOf(::ContentReportRepository)
 
     // Loggers
     factory { TelegramLogger(get(), get(), get()) } bind Logger::class
